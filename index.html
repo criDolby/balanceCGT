@@ -20,11 +20,12 @@
 
 //////////////////////////////////////////////////////////////////////
 //-- RENDER --//
+
 queryString = window.location.search;
-console.log(queryString);
+console.log(localStorage.getItem("accToken"));
 urlParams = new URLSearchParams(queryString);
 // Controllo se è presente un access token
-if(localStorage.getItem("accToken")){
+if(localStorage.getItem("accToken") !== null){
     getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
 }else if(urlParams.get('code') !== null){
     console.log(queryString);
