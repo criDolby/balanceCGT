@@ -24,15 +24,16 @@
 queryString = window.location.search;
 console.log(queryString);
 urlParams = new URLSearchParams(queryString);
-console.log('Loading Callback Params: ' + urlParams);
-//Create the Code Response from the URL params
-codeResponse = new Object;
-codeResponse.code = urlParams.get('code');
-codeResponse.state = urlParams.get('state');
-codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
+if(urlParams.get('code') !== null){
+    console.log(queryString);
+    console.log('Loading Callback Params: ' + urlParams);
+    //Create the Code Response from the URL params
+    codeResponse = new Object;
+    codeResponse.code = urlParams.get('code');
+    codeResponse.state = urlParams.get('state');
+    codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
 // Call the common token exhcange method.
-if(codeResponse.code !== null){
-  tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"), localStorage.getItem("clientId"), 'code', null);
+    tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"), localStorage.getItem("clientId"), 'code', null);
 }
 async function initiateSSOFlow() {
 
