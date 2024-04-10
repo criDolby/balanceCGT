@@ -152,7 +152,8 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
         //Access Tokens have been returned
                 console.log("Code and Credntial Flow, token response: ");
                 console.log(JSON.parse(client.response));
-                console.log(JSON.parse(client.response.access_token));
+                console.log("Client Response");
+                console.log(client.response);
             } else {
                 client.onError = function(){
                   error(client, {});
