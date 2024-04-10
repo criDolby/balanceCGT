@@ -4,14 +4,10 @@
 
 <div class="flex-center full-height">
     <div class="content">
-        <button type="button" onclick='initiateSSOFlow()'>Click Me!</button>
-        <div id="token" class="hidden">
-            <h2>Access Token</h2>
-            <div id="access_token" class="code"></div>
-        </div>
-        <div id="error" class="hidden">
-            <h2>Error</h2>
-            <div id="error_details" class="code"></div>
+        <button type="button" onclick='initiateSSOFlow()'>Login!</button>
+        <div id="userOk" class="hidden">
+            <h2>Benvenuto</h2>
+            <div id="loginOk" class="code"></div>
         </div>
     </div>
 </div>  
@@ -181,6 +177,10 @@ function getUserInfo(accessToken, expDomain) {
             if (this.status == 200) {
             //User Info response
             console.log(client.response);
+            userArr = JSON.parse(client.response)
+            document.getElementById("loginOk").innerText = userArr.name;
+            document.getElementById("start").classList = "hidden";
+            document.getElementById("userOk").classList = "";
             } else {
                 console.log(client.response)
                 //onError("An Error Occured during Forgot Password Step: " +
