@@ -4,7 +4,9 @@
 
 <div class="flex-center full-height">
     <div class="content">
-        <button type="button" onclick='initiateSSOFlow()'>Login!</button>
+        <div id="buttonLogin">
+            <button type="button" onclick='initiateSSOFlow()'>Login!</button>
+        </div>
         <div id="userOk" class="hidden">
             <h2>Benvenuto</h2>
             <div id="loginOk" class="code"></div>
@@ -179,7 +181,7 @@ function getUserInfo(accessToken, expDomain) {
             console.log(client.response);
             userArr = JSON.parse(client.response)
             document.getElementById("loginOk").innerText = userArr.name;
-            document.getElementById("start").classList = "hidden";
+            document.getElementById("buttonLogin").classList = "hidden";
             document.getElementById("userOk").classList = "";
             } else {
                 console.log(client.response)
