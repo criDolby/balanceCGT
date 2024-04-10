@@ -22,7 +22,7 @@
 //-- RENDER --//
 
 queryString = window.location.search;
-console.log(localStorage.getItem("accToken"));
+console.log('acess token after refresh' +localStorage.getItem("accToken"));
 urlParams = new URLSearchParams(queryString);
 // Controllo se è presente un access token
 if(localStorage.getItem("accToken") !== null){
@@ -157,6 +157,7 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
                 responseArr = JSON.parse(client.response)
                 console.log("Access Token: ");
                 console.log(responseArr.access_token);
+                localStorage.setItem("accToken", responseArr.access_token);
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                 client.onError = function(){
