@@ -135,10 +135,10 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
 // Create Client
     client = new XMLHttpRequest();
     client.open("POST", commUrl + tokenURI, true);
-    //client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    //client.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:5000");
-    //client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-    //client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+    client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    client.setRequestHeader("Access-Control-Allow-Origin", "https://cridolby.github.io/prima/");
+    client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+    client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
     requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + callbackURL;
 // Add PKCE
