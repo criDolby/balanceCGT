@@ -155,7 +155,7 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
                 responseArr = JSON.parse(client.response)
                 console.log("Access Token: ");
                 console.log(responseArr.access_token);
-                getUserInfo(responseArr.access_token);
+                getUserInfo(responseArr.access_token, commUrl);
             } else {
                 client.onError = function(){
                   error(client, {});
@@ -165,7 +165,8 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
     }
 }
 
-function getUserInfo(accessToken) {
+function getUserInfo(accessToken, expDomain) {
+    userInfoURI = '/services/oauth2/userinfo';
     client = new XMLHttpRequest();
     client.open("GET", expDomain + userInfoURI, true);
     client.setRequestHeader("Content-Type", "application/json");
@@ -184,6 +185,7 @@ function getUserInfo(accessToken) {
         }
     }
 }
+
 
 </script>
 
