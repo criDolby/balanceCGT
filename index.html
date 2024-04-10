@@ -32,7 +32,7 @@ async function initiateSSOFlow() {
     const authorizeURI = '/services/oauth2/authorize';
     const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';
     localStorage.setItem("clientId", clientId);
-    const redirectURI = 'http://localhost:5000'
+    const redirectURI = 'https://cridolby.github.io/prima/'
     const responsType = 'code';
     const ssoProvider = 'AzureADB2CTest';
 
@@ -57,35 +57,6 @@ async function initiateSSOFlow() {
 //-- Redirect the Browser --//
     window.location = redirectURL;
 }
-
-// Get URL Params from the callback URL
-/*
-    queryString = window.location.search;
-    urlParams = new URLSearchParams(queryString);
-    console.log('Loading Callback Params: ' + urlParams);
-//Create the Code Response from the URL params
-    codeResponse = new Object;
-    codeResponse.code = urlParams.get('code');
-    codeResponse.state = urlParams.get('state');
-    codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
-// Call the common token exhcange method.
-    tokenExchange(codeResponse, codeVerifier, clientId, responsType, null);
-
-*/
-/*
-var q = parseQueryString(window.location.search.substring(1));
-
-// Check if the server returned an error string
-if(q.error) {
-    alert("Error returned from authorization server: "+q.error);
-    document.getElementById("error_details").innerText = q.error+"\n\n"+q.error_description;
-    document.getElementById("error").classList = "";
-}
-if(q.code) {
-
-    console.log('OK!');
-}
-*/
 
   queryString = window.location.search;
   urlParams = new URLSearchParams(queryString);
@@ -150,8 +121,8 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
     console.log('baseURL: ' + baseURL);
     state = null;
     const tokenURI = '/services/oauth2/token';
-    const callbackURL = 'http://localhost:5000';
-    const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/';
+    const callbackURL = 'https://cridolby.github.io/prima/';
+    const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti';
     // validate state if it was present
     if (stateIdentifier != null) {
         state = getState(stateIdentifier, true);
@@ -164,10 +135,10 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
 // Create Client
     client = new XMLHttpRequest();
     client.open("POST", commUrl + tokenURI, true);
-    client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    client.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:5000");
-    client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-    client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+    //client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    //client.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:5000");
+    //client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+    //client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
     requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + callbackURL;
 // Add PKCE
