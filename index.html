@@ -24,7 +24,7 @@ queryString = window.location.search;
 console.log(queryString);
 urlParams = new URLSearchParams(queryString);
 // Controllo se è presente un access token
-if(localStorage.getItem("accToken"){
+if(localStorage.getItem("accToken")){
     getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
 }else{
     console.log(queryString);
