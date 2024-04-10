@@ -20,11 +20,13 @@
 
 //////////////////////////////////////////////////////////////////////
 //-- RENDER --//
-
 queryString = window.location.search;
 console.log(queryString);
 urlParams = new URLSearchParams(queryString);
-if(urlParams.get('code') !== null){
+// Controllo se è presente un access token
+if(localStorage.getItem("accToken"){
+    getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
+}else{
     console.log(queryString);
     console.log('Loading Callback Params: ' + urlParams);
     //Create the Code Response from the URL params
