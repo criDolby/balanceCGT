@@ -155,10 +155,31 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
                 responseArr = JSON.parse(client.response)
                 console.log("Access Token: ");
                 console.log(responseArr.access_token);
+                getUserInfo(responseArr.access_token);
             } else {
                 client.onError = function(){
                   error(client, {});
                 }
+            }
+        }
+    }
+}
+
+function getUserInfo(accessToken) {
+    client = new XMLHttpRequest();
+    client.open("GET", expDomain + userInfoURI, true);
+    client.setRequestHeader("Content-Type", "application/json");
+    client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
+    client.send();
+    client.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if (this.status == 200) {
+            //User Info response
+            console.log(client.response);
+            } else {
+                console.log(client.response)
+                //onError("An Error Occured during Forgot Password Step: " +
+                //forgotPasswordProcessStep, client.response);
             }
         }
     }
