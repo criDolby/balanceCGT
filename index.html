@@ -26,7 +26,7 @@ urlParams = new URLSearchParams(queryString);
 // Controllo se è presente un access token
 if(localStorage.getItem("accToken")){
     getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
-}else{
+}else if(urlParams.get('code') !== null){
     console.log(queryString);
     console.log('Loading Callback Params: ' + urlParams);
     //Create the Code Response from the URL params
