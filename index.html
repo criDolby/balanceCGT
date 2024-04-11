@@ -44,6 +44,7 @@ async function initiateSSOFlow() {
     const authorizeURI = '/services/oauth2/authorize';
     const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';
     localStorage.setItem("clientId", clientId);
+    localStorage.setItem("sorgente", "sitoCGT");
     localStorage.setItem("commUrl", commUrl);
     const redirectURI = 'https://cridolby.github.io/prima/'
     const responsType = 'code';
