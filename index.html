@@ -25,7 +25,7 @@ queryString = window.location.search;
 console.log('acess token after refresh' +localStorage.getItem("accToken"));
 urlParams = new URLSearchParams(queryString);
 // Controllo se è presente un access token
-if(localStorage.getItem("accToken") !== null){
+if(localStorage.getItem("accToken") !== null && urlParams.get('code') !== null){
     getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
 }else if(urlParams.get('code') !== null){
     console.log(queryString);
@@ -38,8 +38,8 @@ if(localStorage.getItem("accToken") !== null){
 // Call the common token exhcange method.
     tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"), localStorage.getItem("clientId"), 'code', null);
 }
+    
 async function initiateSSOFlow() {
-
 //-- Costanti & Variabili --//
     const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti';
     const authorizeURI = '/services/oauth2/authorize';
@@ -207,7 +207,8 @@ function logoutUser() {
     client.onreadystatechange = function() {
         if(this.readyState == 4) {
             if (this.status == 200) {
-            console.log(client.response);
+                console.log(client.response);
+                localStorage.removeItem("accToken");
             } else {
                 console.log(client.response)
                 //onError("An Error Occured during Forgot Password Step: " +
