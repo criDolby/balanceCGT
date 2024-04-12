@@ -178,7 +178,7 @@ function logoutUser() {
                         postLogoutRedirectUri: "https://cgtspa--devmerge.sandbox.my.salesforce.com/services/auth/rp/oidc/logout",
                       },
                 };
-                const myMsal = new UserAgentApplication(config);
+                const myMsal = new Msal.UserAgentApplication(config);
                 myMsal.logout();
                // window.location = redirectURL;
             } else {
