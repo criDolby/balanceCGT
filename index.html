@@ -171,16 +171,7 @@ function logoutUser() {
             if (this.status == 200) {
                 console.log(client.response);
                 localStorage.removeItem("accToken");
-                const config = {
-                      auth: {
-                        clientId: localStorage.getItem("clientId"),
-                        redirectUri: redirectURL, //defaults to application start page
-                        postLogoutRedirectUri: "https://cgtspa--devmerge.sandbox.my.salesforce.com/services/auth/rp/oidc/logout",
-                      },
-                };
-                const myMsal = new Msal.UserAgentApplication(config);
-                myMsal.logout();
-               // window.location = redirectURL;
+                window.location = redirectURL;
             } else {
                 console.log(client.response)
                 //onError("An Error Occured during Forgot Password Step: " +
