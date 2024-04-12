@@ -11,6 +11,7 @@
         <div id="userOk" class="hidden">
             <h2>Benvenuto</h2>
             <div id="loginOk" class="code"></div>
+            <button type="button" onclick='logoutUser()'>LOGOUT</button>
         </div>
     </div>
 </div>  
@@ -185,6 +186,28 @@ function getUserInfo(accessToken, expDomain) {
             document.getElementById("loginOk").innerText = userArr.name;
             document.getElementById("buttonLogin").classList = "hidden";
             document.getElementById("userOk").classList = "";
+            } else {
+                console.log(client.response)
+                //onError("An Error Occured during Forgot Password Step: " +
+                //forgotPasswordProcessStep, client.response);
+            }
+        }
+    }
+}
+
+function logoutUser() {
+    revokeTokenURI = '/services/oauth2/revoke';
+    accessToken = localStorage.getItem("accToken");
+    expDomain =  localStorage.getItem("commUrl");
+    client = new XMLHttpRequest();
+    client.open("POST", expDomain + revokeTokenURI, true);
+    client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    requestBody = "token=" + accessToken;
+    client.send(requestBody);
+    client.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if (this.status == 200) {
+            console.log(client.response);
             } else {
                 console.log(client.response)
                 //onError("An Error Occured during Forgot Password Step: " +
