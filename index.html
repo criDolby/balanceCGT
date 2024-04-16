@@ -63,6 +63,7 @@ async function initiateSSOFlow() {
 //-- Costruzione redirect --//
     redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
+     '&prompt=login' +
      '&redirect_uri=' + redirectURI + 
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
