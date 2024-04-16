@@ -171,7 +171,8 @@ function logoutUser() {
             if (this.status == 200) {
                 console.log("FASE DI LOGOUT!!!!!!!!");
                 console.log(client.response);
-                localStorage.removeItem("accToken");
+                localStorage.clear();
+                sessionStorage.clear()
                 window.location = redirectURL;
             } else {
                 console.log(client.response)
