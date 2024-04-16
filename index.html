@@ -170,7 +170,6 @@ function logoutUser() {
         if(this.readyState == 4) {
             if (this.status == 200) {
                 console.log("FASE DI LOGOUT!!!!!!!!");
-                SFIDWidget.init();
                 console.log(client.response);
                 localStorage.removeItem("accToken");
                 window.location = redirectURL;
@@ -225,7 +224,6 @@ async function pkceChallengeFromVerifier(v) {
 
 
 </script>
-<script src="https://embeddedlogin-developer-edition.na99.force.com/demo/servlet/servlet.loginwidgetcontroller?type=javascipt_widget&min=false" async defer></script>
 <style>
 body {
   padding: 0;
