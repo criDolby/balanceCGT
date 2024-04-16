@@ -26,7 +26,12 @@ console.log('acess token after refresh' +localStorage.getItem("accToken"));
 urlParams = new URLSearchParams(queryString);
 // Controllo se è presente un access token
 if(localStorage.getItem("accToken") !== null){
-    getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
+    try {
+      getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
+    } catch (error) {
+        localStorage.removeItem("accToken");
+        console.error(error);
+    }
 }else if(urlParams.get('code') !== null){
     console.log(queryString);
     console.log('Loading Callback Params: ' + urlParams);
