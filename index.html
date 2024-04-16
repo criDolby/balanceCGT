@@ -148,6 +148,7 @@ function getUserInfo(accessToken, expDomain) {
             document.getElementById("loginOk").innerText = userArr.name;
             document.getElementById("buttonLogin").classList = "hidden";
             document.getElementById("userOk").classList = "";
+            localStorage.setItem("user", userArr);
             } else {
                 console.log(client.response)
                 //onError("An Error Occured during Forgot Password Step: " +
