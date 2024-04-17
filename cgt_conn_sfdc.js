@@ -1,4 +1,21 @@
-import  {commUrl, redirectURI, azureLogoutURI, clientId, ssoProvider} from './cgt_conn_sfdc_const.js';
+/**************************************************************************************                                                                             
+                                                                             
+                                                                                                                                                       
+           _                                                    __    _      
+          | |                                                  / _|  | |     
+  ___ __ _| |_             ___ ___  _ __  _ __             ___| |_ __| | ___ 
+ / __/ _` | __|           / __/ _ \| '_ \| '_ \           / __|  _/ _` |/ __|
+| (_| (_| | |_           | (_| (_) | | | | | | |          \__ \ || (_| | (__ 
+ \___\__, |\__|           \___\___/|_| |_|_| |_|          |___/_| \__,_|\___|
+      __/ |      ______                           ______                     
+     |___/      |______|                         |______|                    
+
+
+                    Created By Balance Spa
+**********************************************************************************************/
+//import  {commUrl, redirectURI, azureLogoutURI, clientId, ssoProvider} from './cgt_conn_sfdc_const.js';
+const {commUrl, redirectURI, azureLogoutURI, clientId, ssoProvider} = require('./cgt_conn_sfdc_const.js');
+
 
 async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
