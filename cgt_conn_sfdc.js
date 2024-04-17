@@ -1,28 +1,27 @@
+const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti';
+const redirectURI = 'https://cridolby.github.io/prima/';
+const azureLogoutURI = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v1/oauth2/v2.0/logout';
+const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';
+const ssoProvider = 'AzureADB2CTest';
 
 
 async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
-    const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti';
-    const authorizeURI = '/services/oauth2/authorize';
-    const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';
     localStorage.setItem("clientId", clientId);
     localStorage.setItem("sorgente", "sitoCGT");
     localStorage.setItem("commUrl", commUrl);
-    const redirectURI = 'https://cridolby.github.io/prima/'
-    const responsType = 'code';
-    const ssoProvider = 'AzureADB2CTest';
 
 //-- PCKE Generator --//
 
-    const codeVerifier = generateRandomString();
+    let codeVerifier = generateRandomString();
     localStorage.setItem("pkce_code_verifier", codeVerifier);
-    console.log('codeVerifier: '+codeVerifier );
         // Hash and base64-urlencode the secret to use as the challenge
-    const codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
-    console.log('codeChallenge: '+codeChallenge );
+    let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
+    let authorizeURI = '/services/oauth2/authorize';
+    let responsType = 'code';
 
 //-- Costruzione redirect --//
-    redirectURL = commUrl + authorizeURI +
+    let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
@@ -36,20 +35,13 @@ async function initiateSSOFlow() {
 }
 
 function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVisitorId) {
-    console.log('codeVerifier: ' +codeVerifier);
-    console.log('clientId: ' +clientId);
-    console.log('authorizeType: ' +authorizeType);
     // Get Values from Code Response
-    code = response.code;
-    console.log('code: ' + code);
-    stateIdentifier = response.state;
-    console.log('stateIdentifier: ' + stateIdentifier);
-    baseURL = response.sfdc_community_url;
-    console.log('baseURL: ' + baseURL);
-    state = null;
-    const tokenURI = '/services/oauth2/token';
-    const callbackURL = 'https://cridolby.github.io/prima/';
-    const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti';
+    let code = response.code;
+    let stateIdentifier = response.state;
+    let baseURL = response.sfdc_community_url;
+    let state = null;
+    let tokenURI = '/services/oauth2/token';
+
     // validate state if it was present
     if (stateIdentifier != null) {
         state = getState(stateIdentifier, true);
@@ -67,26 +59,21 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
-    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + callbackURL;
+    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI;
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
-    console.log('requestBody: ' +requestBody);
 // Send Request
     client.send(requestBody);
     client.onreadystatechange = function() {
         if(this.readyState == 4) {
             if (this.status == 200) {
         //Access Tokens have been returned
-                console.log("Code and Credntial Flow, token response: ");
-                console.log(JSON.parse(client.response));
                 responseArr = JSON.parse(client.response)
-                console.log("Access Token: ");
-                console.log(responseArr.access_token);
                 localStorage.setItem("accToken", responseArr.access_token);
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
-                client.onError = function(){
-                  error(client, {});
+                    client.onError = function(){
+                    error(client, {});
                 }
             }
         }
@@ -111,7 +98,9 @@ function getUserInfo(accessToken, expDomain) {
             document.getElementById("userOk").classList = "";
             localStorage.setItem("user", userArr);
             } else {
-                console.log(client.response)
+                client.onError = function(){
+                error(client, {});
+                console.log(error)
                 //onError("An Error Occured during Forgot Password Step: " +
                 //forgotPasswordProcessStep, client.response);
             }
@@ -120,10 +109,10 @@ function getUserInfo(accessToken, expDomain) {
 }
 
 function logoutUser() {
-    redirectURL = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v1/oauth2/v2.0/logout?post_logout_redirect_uri=https://cridolby.github.io/prima';
-    revokeTokenURI = '/services/oauth2/revoke';
-    accessToken = localStorage.getItem("accToken");
-    expDomain =  localStorage.getItem("commUrl");
+    let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
+    let revokeTokenURI = '/services/oauth2/revoke';
+    let accessToken = localStorage.getItem("accToken");
+    let expDomain =  localStorage.getItem("commUrl");
     client = new XMLHttpRequest();
     client.open("POST", expDomain + revokeTokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -132,14 +121,11 @@ function logoutUser() {
     client.onreadystatechange = function() {
         if(this.readyState == 4) {
             if (this.status == 200) {
-                console.log("FASE DI LOGOUT!!!!!!!!");
-                console.log(client.response);
                 localStorage.clear();
                 sessionStorage.clear()
-                window.location = redirectURL;
+                window.location = redirectLogoutURL;
             } else {
-                console.log(client.response)
-                window.location = redirectURL;
+                window.location = redirectLogoutURL;
                 //onError("An Error Occured during Forgot Password Step: " +
                 //forgotPasswordProcessStep, client.response);
             }
