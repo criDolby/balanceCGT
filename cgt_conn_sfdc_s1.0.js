@@ -43,7 +43,7 @@ async function initiateSSOFlow() {
     window.location = redirectURL;
 }
 
-function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVisitorId) {
+function tokenExchange(response, codeVerifier) {
     sessionStorage.setItem("sorgente", sorgente);
     // Get Values from Code Response
     let code = response.code;
@@ -90,11 +90,11 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
     }
 }
 
-function getUserInfo(accessToken, expDomain) {
+function getUserInfo(accessToken) {
     userInfoURI = '/services/oauth2/userinfo';
     sessionStorage.setItem("sorgente", sorgente);
     client = new XMLHttpRequest();
-    client.open("GET", expDomain + userInfoURI, true);
+    client.open("GET", commUrl + userInfoURI, true);
     client.setRequestHeader("Content-Type", "application/json");
     client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
     client.send();
