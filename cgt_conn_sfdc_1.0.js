@@ -107,6 +107,9 @@ function getUserInfo(accessToken, expDomain) {
             document.getElementById("loginOk").innerText = userArr.name;
             document.getElementById("buttonLogin").classList = "hidden";
             document.getElementById("userOk").classList = "";
+            if(userArr.custom_attributes.utentePortale === null){
+                window.location = complProfiloComm;
+            }
             localStorage.setItem("user", userArr);
             } else {
                 client.onError = function(){
