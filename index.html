@@ -31,7 +31,7 @@ urlParams = new URLSearchParams(queryString);
 // Controllo se è presente un access token
 if(localStorage.getItem("accToken") !== null){
     try {
-      getUserInfo(localStorage.getItem("accToken"), localStorage.getItem("commUrl"));
+      getUserInfo(localStorage.getItem("accToken"));
     } catch (error) {
         localStorage.removeItem("accToken");
         console.error(error);
@@ -45,7 +45,7 @@ if(localStorage.getItem("accToken") !== null){
     codeResponse.state = urlParams.get('state');
     codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
 // Call the common token exhcange method.
-    tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"), localStorage.getItem("clientId"), 'code', null);
+    tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"));
 }
 
 
