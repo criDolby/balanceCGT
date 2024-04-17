@@ -99,8 +99,8 @@ function getUserInfo(accessToken, expDomain) {
             localStorage.setItem("user", userArr);
             } else {
                 client.onError = function(){
-                error(client, {});
-                console.log(error)
+                    error(client, {})
+                }
                 //onError("An Error Occured during Forgot Password Step: " +
                 //forgotPasswordProcessStep, client.response);
             }
