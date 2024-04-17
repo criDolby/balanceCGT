@@ -123,9 +123,8 @@ function logoutUser() {
     let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
     let accessToken = localStorage.getItem("accToken");
-    let expDomain =  localStorage.getItem("commUrl");
     client = new XMLHttpRequest();
-    client.open("POST", expDomain + revokeTokenURI, true);
+    client.open("POST", commUrl + revokeTokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestBody = "token=" + accessToken;
     client.send(requestBody);
