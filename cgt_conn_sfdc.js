@@ -13,7 +13,7 @@
 
                     Created By Balance Spa
 **********************************************************************************************/
-import  {commUrl, redirectURI, azureLogoutURI, clientId, ssoProvider} from './cgt_conn_sfdc_const';
+import  {commUrl, redirectURI, azureLogoutURI, clientId, ssoProvider} from './cgt_conn_sfdc_const.js';
 
 
 async function initiateSSOFlow() {
