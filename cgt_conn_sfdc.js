@@ -17,7 +17,7 @@
 async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
     localStorage.setItem("clientId", clientId);
-   localStorage.setItem("sorgente", sorgente);
+    sessionStorage.setItem("sorgente", sorgente);
     localStorage.setItem("commUrl", commUrl);
 
 //-- PCKE Generator --//
@@ -44,6 +44,7 @@ async function initiateSSOFlow() {
 }
 
 function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVisitorId) {
+    sessionStorage.setItem("sorgente", sorgente);
     // Get Values from Code Response
     let code = response.code;
     let stateIdentifier = response.state;
@@ -91,6 +92,7 @@ function tokenExchange(response, codeVerifier, clientId, authorizeType, uniqueVi
 
 function getUserInfo(accessToken, expDomain) {
     userInfoURI = '/services/oauth2/userinfo';
+    sessionStorage.setItem("sorgente", sorgente);
     client = new XMLHttpRequest();
     client.open("GET", expDomain + userInfoURI, true);
     client.setRequestHeader("Content-Type", "application/json");
