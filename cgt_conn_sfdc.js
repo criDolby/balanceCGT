@@ -17,7 +17,7 @@
 async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
     localStorage.setItem("clientId", clientId);
-    localStorage.setItem("sorgente", "sitoCGT");
+   localStorage.setItem("sorgente", sorgente);
     localStorage.setItem("commUrl", commUrl);
 
 //-- PCKE Generator --//
