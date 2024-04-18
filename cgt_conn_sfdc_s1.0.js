@@ -17,9 +17,9 @@
 async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
     localStorage.setItem("clientId", clientId);
-    sessionStorage.setItem("sorgente", sorgente);
+    //sessionStorage.setItem("sorgente", sorgente);
     document.cookie = "sorgente=sitoCGT";
-    localStorage.setItem("commUrl", commUrl);
+    //localStorage.setItem("commUrl", commUrl);
 
 //-- PCKE Generator --//
 
@@ -79,8 +79,8 @@ function tokenExchange(response, codeVerifier) {
         if(this.readyState == 4) {
             if (this.status == 200) {
         //Access Tokens have been returned
-                responseArr = JSON.parse(client.response)
-                localStorage.setItem("accToken", responseArr.access_token);
+                responseArr = JSON.parse(client.response);
+                document.cookie = "SFToken=" +responseArr.access_token;
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
