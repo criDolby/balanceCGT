@@ -18,6 +18,7 @@ async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
     localStorage.setItem("clientId", clientId);
     sessionStorage.setItem("sorgente", sorgente);
+    document.cookie = "username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
     localStorage.setItem("commUrl", commUrl);
 
 //-- PCKE Generator --//
