@@ -26,16 +26,16 @@
 //-- RENDER --//
 
 queryString = window.location.search;
-console.log('acess token after refresh' +localStorage.getItem("accToken"));
 urlParams = new URLSearchParams(queryString);
-accToken = getCookie("SFToken");
+accToken = getCookie("SFTokenSITO");
+console.log('acess token after refresh' +accToken;
 //console.log(document.cookie);
 // Controllo se è presente un access token
 if(accToken !== ""){
     try {
       getUserInfo(accToken);
     } catch (error) {
-        document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
+        document.cookie = "SFTokenSITO=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
         console.error(error);
     }
 }else if(urlParams.get('code') !== null){
