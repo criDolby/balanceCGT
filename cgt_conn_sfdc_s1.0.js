@@ -80,7 +80,7 @@ function tokenExchange(response, codeVerifier) {
             if (this.status == 200) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response);
-                document.cookie = "SFToken=" +responseArr.access_token + "; path=/;";
+                document.cookie = "SFToken=" +responseArr.access_token +"; path=/;";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -123,7 +123,7 @@ function getUserInfo(accessToken) {
 function logoutUser() {
     let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
-    let accessToken = localStorage.getItem("accToken");
+    let accessToken = getCookie("SFToken");
     client = new XMLHttpRequest();
     client.open("POST", commUrl + revokeTokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -182,5 +182,20 @@ function base64urlencode(str) {
 async function pkceChallengeFromVerifier(v) {
     hashed = await sha256(v);
     return base64urlencode(hashed);
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
