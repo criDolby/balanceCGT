@@ -16,7 +16,7 @@
 
 async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
-    localStorage.setItem("clientId", clientId);
+    //localStorage.setItem("clientId", clientId);
     //sessionStorage.setItem("sorgente", sorgente);
     document.cookie = "sorgente=sitoCGT";
     //localStorage.setItem("commUrl", commUrl);
@@ -45,7 +45,7 @@ async function initiateSSOFlow() {
 }
 
 function tokenExchange(response, codeVerifier) {
-    sessionStorage.setItem("sorgente", sorgente);
+    //sessionStorage.setItem("sorgente", sorgente);
     // Get Values from Code Response
     let code = response.code;
     let stateIdentifier = response.state;
@@ -80,7 +80,7 @@ function tokenExchange(response, codeVerifier) {
             if (this.status == 200) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response);
-                document.cookie = "SFToken=" +responseArr.access_token;
+                document.cookie = "SFToken=" +responseArr.access_token + "; path=/;";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -93,7 +93,7 @@ function tokenExchange(response, codeVerifier) {
 
 function getUserInfo(accessToken) {
     userInfoURI = '/services/oauth2/userinfo';
-    sessionStorage.setItem("sorgente", sorgente);
+    //sessionStorage.setItem("sorgente", sorgente);
     client = new XMLHttpRequest();
     client.open("GET", commUrl + userInfoURI, true);
     client.setRequestHeader("Content-Type", "application/json");
@@ -134,6 +134,7 @@ function logoutUser() {
             if (this.status == 200) {
                 localStorage.clear();
                 sessionStorage.clear()
+                document.cookie = "SFToken="; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/;";
                 window.location = redirectLogoutURL;
             } else {
                 window.location = redirectLogoutURL;
