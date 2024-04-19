@@ -134,7 +134,7 @@ function logoutUser() {
             if (this.status == 200) {
                 localStorage.clear();
                 sessionStorage.clear()
-                document.cookie = "SFToken="; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/;";
+                document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/;";
                 window.location = redirectLogoutURL;
             } else {
                 window.location = redirectLogoutURL;
