@@ -82,7 +82,7 @@ function tokenExchange(response, codeVerifier) {
                 responseArr = JSON.parse(client.response);
               // Creo i cookie per i vari portali
                 //document.cookie = "SFTokenPORTALE=" +responseArr.access_token +"; path=/; Secure; domain=balanceconsulting.it";
-                document.cookie = "SFToken=" +responseArr.access_token +"; domain=.github.io; path=/; Secure";
+                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
