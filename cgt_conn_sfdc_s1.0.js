@@ -80,7 +80,9 @@ function tokenExchange(response, codeVerifier) {
             if (this.status == 200) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response);
-                document.cookie = "SFToken=" +responseArr.access_token +"; path=/;";
+              // Creo i cookie per i vari portali
+                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure; Domain=https://balanceconsulting.it";
+                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
