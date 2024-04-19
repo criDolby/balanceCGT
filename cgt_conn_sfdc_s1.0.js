@@ -98,9 +98,11 @@ function getUserInfo(accessToken) {
             console.log(client.response);
             userArr = JSON.parse(client.response)
             localStorage.setItem("user", userArr);
+              // manipolazione DOM
             document.getElementById("loginOk").innerText = userArr.name;
             document.getElementById("buttonLogin").classList = "hidden";
             document.getElementById("userOk").classList = "";
+              // Fine manipolazione
             } else {
                 client.onError = function(){
                     error(client, {})
