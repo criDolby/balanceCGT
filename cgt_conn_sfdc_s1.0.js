@@ -12,16 +12,14 @@
 
 
                     Created By Balance Spa
-                    cgt_conn_sfdc_p
-                    versione 1.0.1
-                    19/04/2024
+                    cgt_conn_sfdc_s
+                    versione 1.1
+                    18/04/2024
 **********************************************************************************************/
 
 async function initiateSSOFlow() {
-//-- Costanti & Variabili --//
-    //localStorage.setItem("clientId", clientId);
-    sessionStorage.setItem("sorgente", sorgente);
-    //localStorage.setItem("commUrl", commUrl);
+
+    document.cookie = "sorgente=sitoCGT";
 
 //-- PCKE Generator --//
 
@@ -47,22 +45,12 @@ async function initiateSSOFlow() {
 }
 
 function tokenExchange(response, codeVerifier) {
-    sessionStorage.setItem("sorgente", sorgente);
     // Get Values from Code Response
     let code = response.code;
     let stateIdentifier = response.state;
     let baseURL = response.sfdc_community_url;
     let state = null;
     let tokenURI = '/services/oauth2/token';
-
-    // validate state if it was present
-    if (stateIdentifier != null) {
-        state = getState(stateIdentifier, true);
-        if (state == null) {
-            onError("A state param was sent back but no state was found");
-            return;
-        }
-    }
 
 // Create Client
     client = new XMLHttpRequest();
@@ -82,7 +70,8 @@ function tokenExchange(response, codeVerifier) {
             if (this.status == 200) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response)
-                localStorage.setItem("accToken", responseArr.access_token);
+                // Creo il cookie
+                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -105,12 +94,7 @@ function getUserInfo(accessToken) {
         if(this.readyState == 4) {
             if (this.status == 200) {
             //User Info response
-            console.log(client.response);
-            userArr = JSON.parse(client.response);
-           // console.log(userArr.custom_attributes.flag_portale);
-           // if(userArr.custom_attributes.flag_portale == 'false'){
-           //     window.location = complProfiloComm;
-           // }
+            userArr = JSON.parse(client.response)
             localStorage.setItem("user", userArr);
             } else {
                 client.onError = function(){
@@ -126,7 +110,7 @@ function getUserInfo(accessToken) {
 function logoutUser() {
     let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
-    let accessToken = localStorage.getItem("accToken");
+    let accessToken = getCookie("SFToken");
     client = new XMLHttpRequest();
     client.open("POST", commUrl + revokeTokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -137,6 +121,7 @@ function logoutUser() {
             if (this.status == 200) {
                 localStorage.clear();
                 sessionStorage.clear()
+                document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
                 window.location = redirectLogoutURL;
             } else {
                 window.location = redirectLogoutURL;
@@ -184,4 +169,19 @@ function base64urlencode(str) {
 async function pkceChallengeFromVerifier(v) {
     hashed = await sha256(v);
     return base64urlencode(hashed);
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
