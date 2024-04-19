@@ -27,15 +27,16 @@
 
 queryString = window.location.search;
 urlParams = new URLSearchParams(queryString);
-accToken = getCookie("SFToken");
-console.log('acess token after refresh' +accToken);
+accToken = localStorage.getItem("accToken");
+console.log('access token after refresh: ' +accToken);
 //console.log(document.cookie);
 // Controllo se è presente un access token
-if(accToken !== ""){
+if(accToken !== null ){
     try {
       getUserInfo(accToken);
     } catch (error) {
-        document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
+        accToken = null;
+        localStorage.removeItem("accToken");
     }
 }else if(urlParams.get('code') !== null){
     console.log(queryString);
