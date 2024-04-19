@@ -28,13 +28,14 @@
 queryString = window.location.search;
 console.log('acess token after refresh' +localStorage.getItem("accToken"));
 urlParams = new URLSearchParams(queryString);
-console.log(document.cookie);
+accToken = getCookie("SFToken");
+//console.log(document.cookie);
 // Controllo se è presente un access token
-if(localStorage.getItem("accToken") !== null){
+if(accToken !== ""){
     try {
-      getUserInfo(localStorage.getItem("accToken"));
+      getUserInfo(accToken);
     } catch (error) {
-        localStorage.removeItem("accToken");
+        document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/;";
         console.error(error);
     }
 }else if(urlParams.get('code') !== null){
