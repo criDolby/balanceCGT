@@ -107,10 +107,10 @@ function getUserInfo(accessToken) {
             //User Info response
             console.log(client.response);
             userArr = JSON.parse(client.response);
-            console.log(userArr.custom_attributes.flag_portale);
-            if(userArr.custom_attributes.flag_portale == 'false'){
-                window.location = complProfiloComm;
-            }
+           // console.log(userArr.custom_attributes.flag_portale);
+           // if(userArr.custom_attributes.flag_portale == 'false'){
+           //     window.location = complProfiloComm;
+           // }
             localStorage.setItem("user", userArr);
             } else {
                 client.onError = function(){
