@@ -50,15 +50,6 @@ function tokenExchange(response, codeVerifier) {
     let state = null;
     let tokenURI = '/services/oauth2/token';
 
-    // validate state if it was present
-    if (stateIdentifier != null) {
-        state = getState(stateIdentifier, true);
-        if (state == null) {
-            onError("A state param was sent back but no state was found");
-            return;
-        }
-    }
-
 // Create Client
     client = new XMLHttpRequest();
     client.open("POST", commUrl + tokenURI, true);
