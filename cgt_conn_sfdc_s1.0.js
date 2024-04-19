@@ -20,8 +20,8 @@
 async function initiateSSOFlow() {
 //-- Costanti & Variabili --//
     //localStorage.setItem("clientId", clientId);
-    //sessionStorage.setItem("sorgente", sorgente);
-    localStorage.setItem("commUrl", commUrl);
+    sessionStorage.setItem("sorgente", sorgente);
+    //localStorage.setItem("commUrl", commUrl);
 
 //-- PCKE Generator --//
 
