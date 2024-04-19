@@ -71,7 +71,8 @@ function tokenExchange(response, codeVerifier) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response)
                 // Creo il cookie
-                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
+                document.cookie = "SFTokenTest=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
+                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -94,8 +95,12 @@ function getUserInfo(accessToken) {
         if(this.readyState == 4) {
             if (this.status == 200) {
             //User Info response
+            console.log(client.response);
             userArr = JSON.parse(client.response)
             localStorage.setItem("user", userArr);
+            document.getElementById("loginOk").innerText = userArr.name;
+            document.getElementById("buttonLogin").classList = "hidden";
+            document.getElementById("userOk").classList = "";
             } else {
                 client.onError = function(){
                     error(client, {})
