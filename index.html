@@ -36,7 +36,6 @@ if(accToken !== ""){
       getUserInfo(accToken);
     } catch (error) {
         document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-        console.error(error);
     }
 }else if(urlParams.get('code') !== null){
     console.log(queryString);
