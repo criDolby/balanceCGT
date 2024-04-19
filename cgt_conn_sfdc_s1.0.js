@@ -81,8 +81,8 @@ function tokenExchange(response, codeVerifier) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response);
               // Creo i cookie per i vari portali
-                document.cookie = "SFTokenPORTALE=" +responseArr.access_token +"; path=/; Secure; Domain=https://balanceconsulting.it";
-                document.cookie = "SFTokenSITO=" +responseArr.access_token +"; path=/; Secure";
+                document.cookie = "SFTokenPORTALE=" +responseArr.access_token +"; path=/; Secure; Domain=balanceconsulting.it;";
+                document.cookie = "SFTokenSITO=" +responseArr.access_token +"; path=/; Secure;";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -136,8 +136,8 @@ function logoutUser() {
             if (this.status == 200) {
                 localStorage.clear();
                 sessionStorage.clear()
-                document.cookie = "SFTokenSITO=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-                document.cookie = "SFTokenPORTALE=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
+                document.cookie = "SFTokenSITO=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/;";
+                document.cookie = "SFTokenPORTALE=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/;";
                 window.location = redirectLogoutURL;
             } else {
                 window.location = redirectLogoutURL;
