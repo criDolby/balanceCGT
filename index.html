@@ -1,7 +1,7 @@
 <html>
     <head> 
-        <script src="./cgt_conn_sfdc_const_s1.0.js" ></script>
-        <script src="./cgt_conn_sfdc_s1.0.js"></script>
+        <script src="./cgt_conn_sfdc_const_s.js" ></script>
+        <script src="./cgt_conn_sfdc_s.js"></script>
         <title>Test Interno SITO CGT LOGIN</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     </head>
@@ -47,6 +47,13 @@ if(accToken !== ""){
     codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
 // Call the common token exhcange method.
     tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"));
+}
+
+if(localStorage.getItem("user") !== null){
+    // manipolazione DOM
+    document.getElementById("loginOk").innerText = localStorage.getItem("user").name;
+    document.getElementById("buttonLogin").classList = "hidden";
+    document.getElementById("userOk").classList = "";
 }
 
 

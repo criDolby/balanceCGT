@@ -1,0 +1,9 @@
+v1.1
+	
+	- Fix Session Problem 
+		- Add set cookie parameter
+		- Removed locale and session parameters:
+			° clientId
+			° sorgente
+			° commUrl
+		- Add getCookie function
