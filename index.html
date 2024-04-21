@@ -33,13 +33,11 @@ console.log('acess token after refresh: ' +accToken);
 // Controllo se è presente un access token
 if(accToken !== ""){
     try {
-      getUserInfo(accToken)
-        .then((user) => {
-          document.getElementById("loginOk").innerText = user.name;
-          document.getElementById("buttonLogin").classList = "hidden";
-          document.getElementById("userOk").classList = "";
-          }
-        )
+      let user = getUserInfo(accToken)
+        document.getElementById("loginOk").innerText = user.name;
+        document.getElementById("buttonLogin").classList = "hidden";
+        document.getElementById("userOk").classList = "";
+
     } catch (error) {
       //  document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
     }

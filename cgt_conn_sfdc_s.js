@@ -94,7 +94,7 @@ function getUserInfo(accessToken) {
             //User Info response
             console.log(client.response);
             userArr = JSON.parse(client.response)
-            return Promise.resolve(userArr);
+            return userArr;
             
             } else {
                 client.onError = function(){
