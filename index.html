@@ -32,15 +32,10 @@ console.log('acess token after refresh: ' +accToken);
 //console.log(document.cookie);
 // Controllo se è presente un access token
 if(accToken !== ""){
-    try {
       let user = getUserInfo(accToken)
-        document.getElementById("loginOk").innerText = user.name;
-        document.getElementById("buttonLogin").classList = "hidden";
-        document.getElementById("userOk").classList = "";
-
-    } catch (error) {
-      //  document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-    }
+      document.getElementById("loginOk").innerText = 'asdasd';
+      document.getElementById("buttonLogin").classList = "hidden";
+      document.getElementById("userOk").classList = "";
 }else if(urlParams.get('code') !== null && accToken === ""){
     console.log(queryString);
     console.log('Loading Callback Params: ' + urlParams);
