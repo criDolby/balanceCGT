@@ -67,8 +67,9 @@ function tokenExchange(response, codeVerifier) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response)
                 // Creo il cookie
-                document.cookie = "SFTokenTest=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
-                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
+                setCookie("SFToken", responseArr.access_token , 4);
+                //document.cookie = "SFTokenTest=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
+                //document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -169,16 +170,23 @@ async function pkceChallengeFromVerifier(v) {
 }
 
 function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+    return "";
+}
+
+function setCookie(cname, cvalue, hours) {
+    const d = new Date();
+    d.setTime(d.getTime() + (hours*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;Secure";
 }
