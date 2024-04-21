@@ -41,9 +41,9 @@ if(accToken !== ""){
           }
         )
     } catch (error) {
-        document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
+      //  document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
     }
-}else if(urlParams.get('code') !== null && accToken == ""){
+}else if(urlParams.get('code') !== null && accToken === ""){
     console.log(queryString);
     console.log('Loading Callback Params: ' + urlParams);
     //Create the Code Response from the URL params
