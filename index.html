@@ -53,7 +53,9 @@ if(accToken !== ""){
     codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
 // Call the common token exhcange method.
     tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"))
-    location.reload();
+    setTimeout(function () {
+      location.reload(true);
+    }, 2000);
 }
 
 
