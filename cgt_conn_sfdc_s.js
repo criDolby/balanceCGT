@@ -53,7 +53,6 @@ function tokenExchange(response, codeVerifier) {
     client = new XMLHttpRequest();
     client.open("POST", commUrl + tokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    //client.setRequestHeader('Access-Control-Allow-Origin', 'https://cridolby.github.io');
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
