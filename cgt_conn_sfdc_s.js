@@ -47,9 +47,6 @@ async function initiateSSOFlow() {
 function tokenExchange(response, codeVerifier) {
     // Get Values from Code Response
     let code = response.code;
-    let stateIdentifier = response.state;
-    let baseURL = response.sfdc_community_url;
-    let state = null;
     let tokenURI = '/services/oauth2/token';
 
 // Create Client
@@ -97,13 +94,12 @@ function getUserInfo(accessToken) {
             //User Info response
             console.log(client.response);
             userArr = JSON.parse(client.response)
-            localStorage.setItem("user", userArr);
+            return Promise.resolve(userArr);
+            
             } else {
                 client.onError = function(){
                     error(client, {})
                 }
-                //onError("An Error Occured during Forgot Password Step: " +
-                //forgotPasswordProcessStep, client.response);
             }
         }
     }
