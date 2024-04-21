@@ -34,6 +34,10 @@ console.log('acess token after refresh' +accToken);
 if(accToken !== ""){
     try {
       getUserInfo(accToken);
+      user = localStorage.getItem("user");
+      document.getElementById("loginOk").innerText = user.name;
+      document.getElementById("buttonLogin").classList = "hidden";
+      document.getElementById("userOk").classList = "";
     } catch (error) {
         document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
     }
@@ -49,12 +53,6 @@ if(accToken !== ""){
     tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"));
 }
 
-if(localStorage.getItem("user") !== null){
-    // manipolazione DOM
-    document.getElementById("loginOk").innerText = localStorage.getItem("user").name;
-    document.getElementById("buttonLogin").classList = "hidden";
-    document.getElementById("userOk").classList = "";
-}
 
 
     </script>
