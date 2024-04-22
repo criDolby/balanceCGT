@@ -23,4 +23,5 @@ const azureLogoutURI = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicro
 const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';	// Client ID Connected App
 const ssoProvider = 'AzureADB2CTest'; //Auth Provider 
 const sorgente = 'portaleCGT'; // scegliere tra portaleCGT, sitoCGT, eventiCGT
-const complProfiloComm = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/s/completamentoprofilo?redirectURL=' +redirectURI ;
+const complProfiloComm = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/s/completamentoprofilo';
+
