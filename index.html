@@ -32,9 +32,9 @@ console.log('acess token after refresh: ' +accToken);
 //console.log(document.cookie);
 // Controllo se è presente un access token
 if(accToken !== ""){
-      let user = getUserInfo(accToken);
-      console.log(user);
-      document.getElementById("loginOk").innerText = user;
+      let userInfo = getUserInfo(accToken);
+      console.log(userInfo);
+      document.getElementById("loginOk").innerText = userInfo;
       document.getElementById("buttonLogin").classList = "hidden";
       document.getElementById("userOk").classList = "";
 }else if(urlParams.get('code') !== null && accToken === ""){
