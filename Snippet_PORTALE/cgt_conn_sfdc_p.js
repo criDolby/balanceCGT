@@ -19,7 +19,7 @@
 
 async function initiateSSOFlow() {
 
-    document.cookie = "sorgente=portaleCGT";
+    document.cookie = "sorgente=portaleCGT; path=/";
 
 //-- PCKE Generator --//
 
