@@ -92,8 +92,9 @@ function getUserInfo(accessToken) {
         if(this.readyState == 4) {
             if (this.status == 200) {
             //User Info response
-            console.log(client.response);
+            //console.log(client.response);
             userArr = JSON.parse(client.response)
+            console.log(userArr);
             return userArr;
             
             } else {
