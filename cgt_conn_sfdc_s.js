@@ -83,7 +83,7 @@ function tokenExchange(response, codeVerifier) {
 function getUserInfo(accessToken) {
     sessionStorage.setItem("sorgente", sorgente);
     userInfoURI = '/services/oauth2/userinfo';
-    var userArr = '';
+    let userArr = '';
     client = new XMLHttpRequest();
     client.open("GET", commUrl + userInfoURI, true);
     client.setRequestHeader("Content-Type", "application/json");
@@ -105,7 +105,6 @@ function getUserInfo(accessToken) {
         }
     }
     console.log(userArr);
-   // return userArr;
 }
 
 function logoutUser() {
