@@ -104,7 +104,7 @@ function getUserInfo(accessToken) {
             }
         }
     }
-    return userArr;
+    return client.onreadystatechange;
 }
 
 function logoutUser() {
