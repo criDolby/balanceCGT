@@ -19,7 +19,7 @@
 
 async function initiateSSOFlow() {
 
-    document.cookie = "sorgente=portaleCGT; path=/";
+    sessionStorage.setItem("sorgente", sorgente);
 
 //-- PCKE Generator --//
 
@@ -48,6 +48,7 @@ function tokenExchange(response, codeVerifier) {
     // Get Values from Code Response
     let code = response.code;
     let tokenURI = '/services/oauth2/token';
+    sessionStorage.setItem("sorgente", sorgente); 
 
 // Create Client
     client = new XMLHttpRequest();
@@ -183,5 +184,5 @@ function setCookie(cname, cvalue, hours) {
     const d = new Date();
     d.setTime(d.getTime() + (hours*60*60*1000));
     let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;Secure;SameSite=None";
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";domain=.cgt.it;path=/;Secure;SameSite=None";
 }

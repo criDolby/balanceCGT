@@ -19,7 +19,7 @@
 
 async function initiateSSOFlow() {
 
-    document.cookie = "sorgente=portaleCGT; path=/";
+    sessionStorage.setItem("sorgente", sorgente); 
 
 //-- PCKE Generator --//
 
@@ -48,6 +48,7 @@ function tokenExchange(response, codeVerifier) {
     // Get Values from Code Response
     let code = response.code;
     let tokenURI = '/services/oauth2/token';
+    sessionStorage.setItem("sorgente", sorgente); 
 
 // Create Client
     client = new XMLHttpRequest();

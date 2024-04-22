@@ -5,6 +5,5 @@ v1.1
 		- Removed locale and session parameters:
 			° clientId
 			° commUrl
-			° sorgente
 		- Add getCookie function
 		- Add setCookie function
