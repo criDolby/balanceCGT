@@ -95,7 +95,7 @@ function getUserInfo(accessToken) {
             //User Info response
             //console.log(client.response);
              userArr = JSON.parse(client.response);
-                     
+            return  userArr;      
             } else {
                 client.onError = function(){
                     error(client, {})
@@ -104,7 +104,7 @@ function getUserInfo(accessToken) {
             }
         }
     }
-    return userArr;
+   // return userArr;
 }
 
 function logoutUser() {
