@@ -32,8 +32,9 @@ console.log('acess token after refresh: ' +accToken);
 //console.log(document.cookie);
 // Controllo se è presente un access token
 if(accToken !== ""){
-      let user = getUserInfo(accToken)
-      document.getElementById("loginOk").innerText = 'asdasd';
+      let user = getUserInfo(accToken);
+      console.log(user.name);
+      document.getElementById("loginOk").innerText = user.name;
       document.getElementById("buttonLogin").classList = "hidden";
       document.getElementById("userOk").classList = "";
 }else if(urlParams.get('code') !== null && accToken === ""){
@@ -46,9 +47,9 @@ if(accToken !== ""){
     codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
 // Call the common token exhcange method.
     tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"))
-   // setTimeout(function () {
-   //   location.reload(true);
-   // }, 2000);
+    setTimeout(function () {
+      location.reload(true);
+    }, 2000);
 }
 
 
