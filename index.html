@@ -34,7 +34,7 @@ console.log('acess token after refresh: ' +accToken);
 if(accToken !== ""){
       let user = getUserInfo(accToken);
       console.log(user);
-      document.getElementById("loginOk").innerText = user.name;
+      document.getElementById("loginOk").innerText = user;
       document.getElementById("buttonLogin").classList = "hidden";
       document.getElementById("userOk").classList = "";
 }else if(urlParams.get('code') !== null && accToken === ""){
