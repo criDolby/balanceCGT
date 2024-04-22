@@ -81,30 +81,33 @@ function tokenExchange(response, codeVerifier) {
 }
 
 function getUserInfo(accessToken) {
-    sessionStorage.setItem("sorgente", sorgente);
-    userInfoURI = '/services/oauth2/userinfo';
-    let userArr = '';
-    client = new XMLHttpRequest();
-    client.open("GET", commUrl + userInfoURI, true);
-    client.setRequestHeader("Content-Type", "application/json");
-    client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
-    client.send();
-    client.onreadystatechange = async function() {
-        if(this.readyState == 4) {
-            if (this.status == 200) {
-            //User Info response
-            //console.log(client.response);
-            return userArr = JSON.parse(client.response);
-                 
-            } else {
-                client.onError = function(){
-                    error(client, {})
+    return new Promise(function (resolve, reject) {
+        sessionStorage.setItem("sorgente", sorgente);
+        userInfoURI = '/services/oauth2/userinfo';
+        let userArr = '';
+        client = new XMLHttpRequest();
+        client.open("GET", commUrl + userInfoURI, true);
+        client.setRequestHeader("Content-Type", "application/json");
+        client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
+        client.send();
+        client.onreadystatechange = function() {
+            if(this.readyState == 4) {
+                if (this.status == 200) {
+                //User Info response
+                //console.log(client.response);
+                resolve( userArr = JSON.parse(client.response));
+                    
+                } else {
+                    reject(
+                        client.onError = function(){
+                            error(client, {})
+                        }
+                    );
                 }
-                return;
             }
         }
-    }
-    console.log(userArr);
+        console.log(userArr);
+    })
 }
 
 function logoutUser() {

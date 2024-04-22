@@ -32,13 +32,17 @@ console.log('acess token after refresh: ' +accToken);
 //console.log(document.cookie);
 // Controllo se è presente un access token
 if(accToken !== ""){
-      var userInfo = getUserInfo(accToken);
-      setTimeout(function () {
-        console.log(userInfo.name);
-        document.getElementById("loginOk").innerText = userInfo.name;
+      getUserInfo(accToken)
+      .then(function (result) {
+
+        console.log(result.name);
+        document.getElementById("loginOk").innerText = result.name;
         document.getElementById("buttonLogin").classList = "hidden";
         document.getElementById("userOk").classList = "";
-      }, 1000);
+      })
+      .catch(function (err) {
+        console.error('Augh, there was an error!', err.statusText);
+      });
 }else if(urlParams.get('code') !== null && accToken === ""){
     console.log(queryString);
     console.log('Loading Callback Params: ' + urlParams);
