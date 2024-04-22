@@ -93,9 +93,7 @@ function getUserInfo(accessToken) {
         client.onreadystatechange = function() {
             if(this.readyState == 4) {
                 if (this.status == 200) {
-                //User Info response
-                //console.log(client.response);
-                resolve( userArr = JSON.parse(client.response));
+                    resolve( userArr = JSON.parse(client.response));
                     
                 } else {
                     reject(
@@ -106,7 +104,6 @@ function getUserInfo(accessToken) {
                 }
             }
         }
-        console.log(userArr);
     })
 }
 
