@@ -95,15 +95,17 @@ function getUserInfo(accessToken) {
             //console.log(client.response);
             userArr = JSON.parse(client.response)
             console.log(userArr.name);
-            return userArr.name;
+            
             
             } else {
                 client.onError = function(){
                     error(client, {})
                 }
+                return;
             }
         }
     }
+    return userArr.name;
 }
 
 function logoutUser() {
