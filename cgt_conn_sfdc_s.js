@@ -94,10 +94,8 @@ function getUserInfo(accessToken) {
             if (this.status == 200) {
             //User Info response
             //console.log(client.response);
-            userArr = JSON.parse(client.response)
-            console.log(userArr.name);
-            
-            
+            return userArr = JSON.parse(client.response);
+                     
             } else {
                 client.onError = function(){
                     error(client, {})
