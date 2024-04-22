@@ -89,7 +89,7 @@ function getUserInfo(accessToken) {
     client.setRequestHeader("Content-Type", "application/json");
     client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
     client.send();
-    client.onreadystatechange = function() {
+    client.onreadystatechange = async function() {
         if(this.readyState == 4) {
             if (this.status == 200) {
             //User Info response
