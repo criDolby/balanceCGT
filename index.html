@@ -33,7 +33,7 @@ console.log('acess token after refresh: ' +accToken);
 // Controllo se è presente un access token
 if(accToken !== ""){
       let user = getUserInfo(accToken);
-      console.log(user.name);
+      console.log(user);
       document.getElementById("loginOk").innerText = user.name;
       document.getElementById("buttonLogin").classList = "hidden";
       document.getElementById("userOk").classList = "";
