@@ -22,6 +22,7 @@ async function initiateSSOFlow() {
     document.cookie = "sorgente=sitoCGT";
 
 //-- PCKE Generator --//
+
     let codeVerifier = generateRandomString();
     localStorage.setItem("pkce_code_verifier", codeVerifier);
         // Hash and base64-urlencode the secret to use as the challenge
@@ -46,9 +47,6 @@ async function initiateSSOFlow() {
 function tokenExchange(response, codeVerifier) {
     // Get Values from Code Response
     let code = response.code;
-    let stateIdentifier = response.state;
-    let baseURL = response.sfdc_community_url;
-    let state = null;
     let tokenURI = '/services/oauth2/token';
 
 // Create Client
@@ -69,7 +67,7 @@ function tokenExchange(response, codeVerifier) {
         //Access Tokens have been returned
                 responseArr = JSON.parse(client.response)
                 // Creo il cookie
-                document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
+                setCookie("SFToken", responseArr.access_token , 4);
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -81,28 +79,31 @@ function tokenExchange(response, codeVerifier) {
 }
 
 function getUserInfo(accessToken) {
-    sessionStorage.setItem("sorgente", sorgente);
-    userInfoURI = '/services/oauth2/userinfo';
-    client = new XMLHttpRequest();
-    client.open("GET", commUrl + userInfoURI, true);
-    client.setRequestHeader("Content-Type", "application/json");
-    client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
-    client.send();
-    client.onreadystatechange = function() {
-        if(this.readyState == 4) {
-            if (this.status == 200) {
-            //User Info response
-            userArr = JSON.parse(client.response)
-            localStorage.setItem("user", userArr);
-            } else {
-                client.onError = function(){
-                    error(client, {})
+    return new Promise(function (resolve, reject) {
+        sessionStorage.setItem("sorgente", sorgente);
+        userInfoURI = '/services/oauth2/userinfo';
+        let userArr = '';
+        client = new XMLHttpRequest();
+        client.open("GET", commUrl + userInfoURI, true);
+        client.setRequestHeader("Content-Type", "application/json");
+        client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
+        client.send();
+        client.onreadystatechange = function() {
+            if(this.readyState == 4) {
+                if (this.status == 200) {
+                    userArr = JSON.parse(client.response)
+                    resolve( userArr );
+                    
+                } else {
+                    reject(
+                        client.onError = function(){
+                            error(client, {})
+                        }
+                    );
                 }
-                //onError("An Error Occured during Forgot Password Step: " +
-                //forgotPasswordProcessStep, client.response);
             }
         }
-    }
+    })
 }
 
 function logoutUser() {
@@ -153,10 +154,6 @@ function sha256(plain) {
 
 // Base64-urlencodes the input string
 function base64urlencode(str) {
-    // Convert the ArrayBuffer to string using Uint8 array to conver to what btoa accepts.
-    // btoa accepts chars only within ascii 0-255 and base64 encodes them.
-    // Then convert the base64 encoded to base64url encoded
-    //   (replace + with -, replace / with _, trim trailing =)
     return btoa(String.fromCharCode.apply(null, new Uint8Array(str)))
         .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
@@ -168,16 +165,23 @@ async function pkceChallengeFromVerifier(v) {
 }
 
 function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+    return "";
+}
+
+function setCookie(cname, cvalue, hours) {
+    const d = new Date();
+    d.setTime(d.getTime() + (hours*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;Secure;SameSite=None";
 }
