@@ -89,21 +89,23 @@ function getUserInfo(accessToken) {
     client.setRequestHeader("Content-Type", "application/json");
     client.setRequestHeader("Authorization", 'Bearer ' + accessToken);
     client.send();
-    client.onreadystatechange = function() {
-        if(this.readyState == 4) {
-            if (this.status == 200) {
-            //User Info response
-            //console.log(client.response);
-             userArr = JSON.parse(client.response);
-            return  userArr;      
-            } else {
-                client.onError = function(){
-                    error(client, {})
+    return userArr =
+        client.onreadystatechange = function() {
+            if(this.readyState == 4) {
+                if (this.status == 200) {
+                //User Info response
+                //console.log(client.response);
+                userArr = JSON.parse(client.response);
+                return  userArr;      
+                } else {
+                    client.onError = function(){
+                        error(client, {})
+                    }
+                    return;
                 }
-                return;
             }
-        }
-    }
+        };
+
    // return userArr;
 }
 
