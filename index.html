@@ -33,10 +33,12 @@ console.log('acess token after refresh: ' +accToken);
 // Controllo se è presente un access token
 if(accToken !== ""){
       let userInfo = getUserInfo(accToken);
-      console.log(userInfo);
-      document.getElementById("loginOk").innerText = userInfo;
-      document.getElementById("buttonLogin").classList = "hidden";
-      document.getElementById("userOk").classList = "";
+      setTimeout(function () {
+        console.log(userInfo);
+        document.getElementById("loginOk").innerText = userInfo;
+        document.getElementById("buttonLogin").classList = "hidden";
+        document.getElementById("userOk").classList = "";
+      }, 1000);
 }else if(urlParams.get('code') !== null && accToken === ""){
     console.log(queryString);
     console.log('Loading Callback Params: ' + urlParams);
