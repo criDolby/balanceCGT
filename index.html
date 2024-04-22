@@ -32,7 +32,7 @@ console.log('acess token after refresh: ' +accToken);
 //console.log(document.cookie);
 // Controllo se è presente un access token
 if(accToken !== ""){
-      let userInfo = getUserInfo(accToken);
+      var userInfo = getUserInfo(accToken);
       setTimeout(function () {
         console.log(userInfo.name);
         document.getElementById("loginOk").innerText = userInfo.name;
