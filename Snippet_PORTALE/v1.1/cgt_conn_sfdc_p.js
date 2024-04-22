@@ -93,7 +93,7 @@ function getUserInfo(accessToken) {
                 if (this.status == 200) {
                   userArr = JSON.parse(client.response);
                   if(userArr.custom_attributes.flag_portale == 'false'){
-                      window.location = complProfiloComm;
+                      window.location = complProfiloComm + '?redirectURL=' +redirectURI ;;
                   }else{
                     resolve( userArr );
                   } 
