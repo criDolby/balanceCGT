@@ -19,7 +19,7 @@
 
 async function initiateSSOFlow() {
 
-    sessionStorage.setItem("sorgente", sorgente); 
+    document.cookie = "sorgenteUser=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
 
 //-- PCKE Generator --//
 

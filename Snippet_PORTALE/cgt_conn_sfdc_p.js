@@ -19,7 +19,8 @@
 
 async function initiateSSOFlow() {
 
-    sessionStorage.setItem("sorgente", sorgente); 
+    //sessionStorage.setItem("sorgente", sorgente); 
+    document.cookie = "sorgenteUser=" + sorgente + ";" + expires + ";path=/;Secure;SameSite=None";
 
 //-- PCKE Generator --//
 
@@ -48,7 +49,6 @@ function tokenExchange(response, codeVerifier) {
     // Get Values from Code Response
     let code = response.code;
     let tokenURI = '/services/oauth2/token';
-    sessionStorage.setItem("sorgente", sorgente); 
 
 // Create Client
     client = new XMLHttpRequest();
@@ -83,7 +83,6 @@ function tokenExchange(response, codeVerifier) {
 
 function getUserInfo(accessToken) {
     return new Promise(function (resolve, reject) {
-        sessionStorage.setItem("sorgente", sorgente);
         userInfoURI = '/services/oauth2/userinfo';
         let userArr = '';
         client = new XMLHttpRequest();
