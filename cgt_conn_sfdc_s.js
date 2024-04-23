@@ -86,6 +86,7 @@ function getUserInfo(accessToken) {
     return new Promise(function (resolve, reject) {
 
         userInfoURI = '/services/oauth2/userinfo';
+        complProfilo = '/s/completamentoprofilo';
         let userArr = '';
         client = new XMLHttpRequest();
         client.open("GET", commUrl + userInfoURI, true);
@@ -96,8 +97,11 @@ function getUserInfo(accessToken) {
             if(this.readyState == 4) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
-                    resolve( userArr );
-                    
+                    if(userArr.custom_attributes.flag_sito == 'false'){
+                        window.location = commUrl + complProfilo + '?redirectURL=' +redirectURI ;
+                    }else{
+                      resolve( userArr );
+                    } 
                 } else {
                     reject(
                         client.onError = function(){
