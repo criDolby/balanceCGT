@@ -98,7 +98,7 @@ function getUserInfo(accessToken) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
                     if(userArr.custom_attributes.flag_sito == 'false'){
-                        window.location = commUrl + complProfilo + +'?sorgente=' +sorgente + '?redirectURL=' +redirectURI ;
+                        window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
                     }else{
                       resolve( userArr );
                     } 
