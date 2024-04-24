@@ -19,13 +19,13 @@
 
 async function initiateSSOFlow() {
 
-    document.cookie = "sorgenteUser=" + sorgente + ";path=/;Secure;SameSite=None";
-    document.cookie = "sorgenteUser=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
+    //document.cookie = "sorgenteUser=" + sorgente + ";path=/;Secure;SameSite=None";
+    //document.cookie = "sorgenteUser=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
 
 //-- PCKE Generator --//
 
     let codeVerifier = generateRandomString();
-    document.cookie = "codeVerifier=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
+     //document.cookie = "codeVerifier=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
     localStorage.setItem("pkce_code_verifier", codeVerifier);
         // Hash and base64-urlencode the secret to use as the challenge
     let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
@@ -98,7 +98,7 @@ function getUserInfo(accessToken) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
                     if(userArr.custom_attributes.flag_sito == 'false'){
-                        window.location = commUrl + complProfilo + '?redirectURL=' +redirectURI ;
+                        window.location = commUrl + complProfilo + '?redirectURL=' +redirectURI +'?sorgente=' +sorgente ;
                     }else{
                       resolve( userArr );
                     } 
