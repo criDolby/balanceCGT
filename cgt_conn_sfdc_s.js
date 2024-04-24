@@ -97,7 +97,10 @@ function getUserInfo(accessToken) {
             if(this.readyState == 4) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
-                    if(userArr.custom_attributes.flag_sito == 'false'){
+                    if(
+                        (userArr.custom_attributes.flag_sito == 'false' && sorgente == 'sitoCGT')    ||
+                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT')
+                    ){
                         window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
                     }else{
                       resolve( userArr );
