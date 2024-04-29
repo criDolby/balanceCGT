@@ -41,9 +41,8 @@ async function initiateSSOFlow() {
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
-    console.log(redirectURL);
 //-- Redirect the Browser --//
-   // window.location = redirectURL;
+    window.location = redirectURL;
 }
 
 function tokenExchange(response, codeVerifier) {
