@@ -118,8 +118,7 @@ function getUserInfo(accessToken) {
 
 function logoutUser() {
    // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
-   sessionStorage.setItem('redirectURL', redirectURI);
-   let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/secur/logout.jsp';
+   let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout';
     let revokeTokenURI = '/services/oauth2/revoke';
 
     let accessToken = getCookie("SFToken");
@@ -131,8 +130,8 @@ function logoutUser() {
     client.onreadystatechange = function() {
         if(this.readyState == 4) {
             if (this.status == 200) {
-                //localStorage.clear();
-                //sessionStorage.clear()
+                localStorage.clear();
+                sessionStorage.clear()
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
                 //window.location = commUrl + complProfilo +'?logout=true' + '&redirectURL=' +redirectLogoutURL ;
 

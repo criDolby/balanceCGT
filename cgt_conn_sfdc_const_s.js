@@ -24,4 +24,3 @@ const azureLogoutURI = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicro
 const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';
 const ssoProvider = 'AzureADB2CTest';
 const sorgente = 'portaleCGT';
-
