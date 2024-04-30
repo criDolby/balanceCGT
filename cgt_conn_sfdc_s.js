@@ -66,7 +66,7 @@ function tokenExchange(response, codeVerifier) {
         if(this.readyState == 4) {
             if (this.status == 200) {
         //Access Tokens have been returned
-                responseArr = JSON.parse(client.response)
+                let responseArr = JSON.parse(client.response)
                 // Creo il cookie
                 setCookie("SFToken", responseArr.access_token , 4);
                 //document.cookie = "SFTokenTest=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
