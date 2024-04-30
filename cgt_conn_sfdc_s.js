@@ -118,7 +118,48 @@ function getUserInfo(accessToken) {
 
 function logoutUser() {
     //let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
-    let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + complProfilo +'?logout=true' + '&redirectURL=' + redirectURI;
+    // get per logout azure
+    azureLogout = new XMLHttpRequest();
+    azureLogout.open("GET", azureLogoutURI, true);
+    //azureLogout.setRequestHeader("Content-Type", "application/json");
+   // azureLogout.setRequestHeader("Authorization", 'Bearer ' + accessToken);
+    azureLogout.send();
+    azureLogout.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if (this.status == 200) {
+                
+                let revokeTokenURI = '/services/oauth2/revoke';
+                let accessToken = getCookie("SFToken");
+                client = new XMLHttpRequest();
+                client.open("POST", commUrl + revokeTokenURI, true);
+                client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                requestBody = "token=" + accessToken;
+                client.send(requestBody);
+                client.onreadystatechange = function() {
+                    if(this.readyState == 4) {
+                        if (this.status == 200) {
+                            localStorage.clear();
+                            sessionStorage.clear()
+                            document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
+                            //window.location = commUrl + complProfilo +'?logout=true' + '&redirectURL=' +redirectLogoutURL ;
+                            window.location = redirectURI;
+                        } else {
+                           console.log('errore revoke token');
+                            //onError("An Error Occured during Forgot Password Step: " +
+                            //forgotPasswordProcessStep, client.response);
+                        }
+                    }
+                }
+            } else {
+                reject(
+                    azureLogout.onError = function(){
+                        error(client, {})
+                    }
+                );
+            }
+        }
+    }
+
     let revokeTokenURI = '/services/oauth2/revoke';
     let accessToken = getCookie("SFToken");
     client = new XMLHttpRequest();
