@@ -117,7 +117,7 @@ function getUserInfo(accessToken) {
 }
 
 function logoutUser() {
-    let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
+   // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
     let accessToken = getCookie("SFToken");
     client = new XMLHttpRequest();
@@ -132,7 +132,8 @@ function logoutUser() {
                 sessionStorage.clear()
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
                 //window.location = commUrl + complProfilo +'?logout=true' + '&redirectURL=' +redirectLogoutURL ;
-                window.location = redirectLogoutURL;
+
+                window.location = commUrl + '/secur/logout.jsp?retUrl=' +redirectURI;
             } else {
                 window.location = redirectLogoutURL;
                 //onError("An Error Occured during Forgot Password Step: " +
