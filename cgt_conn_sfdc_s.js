@@ -159,7 +159,7 @@ function logoutUser() {
             }
         }
     }
-
+/*
     let revokeTokenURI = '/services/oauth2/revoke';
     let accessToken = getCookie("SFToken");
     client = new XMLHttpRequest();
@@ -182,6 +182,7 @@ function logoutUser() {
             }
         }
     }
+    */
 }
 
     
