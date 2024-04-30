@@ -133,7 +133,7 @@ function logoutUser() {
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
                 //window.location = commUrl + complProfilo +'?logout=true' + '&redirectURL=' +redirectLogoutURL ;
 
-                window.location = commUrl + '/secur/logout.jsp?retUrl=' +redirectURI;
+                window.location.replace = commUrl + '/secur/logout.jsp?retUrl=' +redirectURI;
             } else {
                 window.location = redirectLogoutURL;
                 //onError("An Error Occured during Forgot Password Step: " +
