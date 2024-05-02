@@ -117,8 +117,8 @@ function getUserInfo(accessToken) {
 }
 
 function logoutUser() {
-   // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
-   let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout?redirectUrl=' +redirectURI;
+    let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
+   //let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout?redirectUrl=' +redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
 
     let accessToken = getCookie("SFToken");
