@@ -117,8 +117,9 @@ function getUserInfo(accessToken) {
 }
 
 function logoutUser() {
-    let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
+    // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
    // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/secur/logout.jsp';
+    let redirectLogoutURL = commUrl + '/s/logout?redirectURL=' +redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
 
     let accessToken = getCookie("SFToken");
@@ -133,16 +134,16 @@ function logoutUser() {
                 localStorage.clear();
                 sessionStorage.clear()
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-
+/*
                 await fetch(commUrl + '/secur/logout.jsp', {
                     method: 'GET',
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                         'Access-Control-Allow-Headers': 'Content-Type',
-                        'Access-Control-Allow-Headers': 'Content-Type',
+                        
                     },
-                })
-;
+                });
+*/
                 window.location.replace(redirectLogoutURL);
                 /*
                 document.cookie = "clientSrc=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
@@ -157,8 +158,6 @@ function logoutUser() {
                // window.location = redirectLogoutURL;
             } else {
                 window.location = redirectLogoutURL;
-                //onError("An Error Occured during Forgot Password Step: " +
-                //forgotPasswordProcessStep, client.response);
             }
         }
     }
