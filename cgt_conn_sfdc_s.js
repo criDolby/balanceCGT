@@ -16,6 +16,13 @@
                     versione 1.1
                     18/04/2024
 **********************************************************************************************/
+import cors from "cors";
+const safelist = ['https://cgtspa--devmerge.sandbox.my.site.com', 'https://cridolby.github.io']
+const corsOptions = {
+  origin: safelist
+}
+
+app.use(cors(corsOptions));
 
 async function initiateSSOFlow() {
 
