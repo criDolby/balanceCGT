@@ -24,11 +24,6 @@
 
 //////////////////////////////////////////////////////////////////////
 //-- RENDER --//
-import cors from "cors";
-const safelist = ['https://cgtspa--devmerge.sandbox.my.site.com', 'https://cridolby.github.io']
-const corsOptions = {
-  origin: safelist
-}
 
 app.use(cors(corsOptions));
 queryString = window.location.search;
