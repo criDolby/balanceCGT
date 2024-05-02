@@ -119,7 +119,6 @@ function getUserInfo(accessToken) {
 function logoutUser() {
     // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
     let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout?redirectURL=' +redirectURI;
-    //let redirectLogoutURL = commUrl + '/s/logout?redirectURL=' +redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
 
     let accessToken = getCookie("SFToken");
@@ -136,17 +135,6 @@ function logoutUser() {
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
 
                 window.location.replace(redirectLogoutURL);
-                /*
-                document.cookie = "clientSrc=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-                document.cookie = "sid_Client=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-                document.cookie = "sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-                document.cookie = "idccsrf=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-                document.cookie = "inst=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-                //window.location = commUrl + complProfilo +'?logout=true' + '&redirectURL=' +redirectLogoutURL ;
-*/
-     //           window.location = commUrl + '/secur/logout.jsp';
-
-               // window.location = redirectLogoutURL;
             } else {
                 window.location = redirectLogoutURL;
             }
