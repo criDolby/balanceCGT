@@ -134,7 +134,15 @@ function logoutUser() {
                 sessionStorage.clear()
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
 
-                await fetch(commUrl + '/secur/logout.jsp');
+                await fetch(commUrl + '/secur/logout.jsp', {
+                    method: 'GET',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Content-Type',
+                        'Access-Control-Allow-Headers': 'Content-Type',
+                    },
+                })
+;
                 window.location.replace(redirectLogoutURL);
                 /*
                 document.cookie = "clientSrc=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
