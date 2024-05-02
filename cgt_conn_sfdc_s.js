@@ -127,12 +127,15 @@ function logoutUser() {
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestBody = "token=" + accessToken;
     client.send(requestBody);
-    client.onreadystatechange = function() {
+    client.onreadystatechange = async function() {
         if(this.readyState == 4) {
             if (this.status == 200) {
                 localStorage.clear();
                 sessionStorage.clear()
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
+
+                await fetch(commUrl + '/secur/logout.jsp');
+                window.location.replace(redirectLogoutURL);
                 /*
                 document.cookie = "clientSrc=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
                 document.cookie = "sid_Client=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
@@ -143,7 +146,7 @@ function logoutUser() {
 */
      //           window.location = commUrl + '/secur/logout.jsp';
 
-                window.location = redirectLogoutURL;
+               // window.location = redirectLogoutURL;
             } else {
                 window.location = redirectLogoutURL;
                 //onError("An Error Occured during Forgot Password Step: " +
