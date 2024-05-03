@@ -12,9 +12,9 @@
 
 
                     Created By Balance Spa
-                    cgt_conn_sfdc_s
-                    versione 1.1
-                    18/04/2024
+                    cgt_conn_sfdc_a
+                    versione 1.2
+                    03/05/2024
 **********************************************************************************************/
 
 async function initiateSSOFlow() {
@@ -98,8 +98,7 @@ function getUserInfo(accessToken) {
                     userArr = JSON.parse(client.response)
                     if(
                         (userArr.custom_attributes.flag_sito == 'false' && sorgente == 'sitoCGT')    ||
-                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') ||
-                        (userArr.custom_attributes.flag_eventi == 'false' && sorgente == 'eventiCGT') 
+                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT')
                     ){
                         window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
                     }else{
@@ -118,6 +117,7 @@ function getUserInfo(accessToken) {
 }
 
 function logoutUser() {
+    // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
     let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout?redirectURL=' +redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
 

@@ -1,0 +1,100 @@
+<html>
+<head> 
+        <script src="./cgt_conn_sfdc_const_p.js" ></script>
+        <script src="./cgt_conn_sfdc_p.js"></script>
+        <title>Test Interno AppEventi CGT LOGIN</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    </head>
+<h1> APP EVENTI CGT!</h1>
+
+<div class="flex-center full-height">
+    <div class="content">
+        <div id="buttonLogin">
+            <button type="button" onclick='initiateSSOFlow()'>Login!</button>
+        </div>
+        <div id="userOk" class="hidden">
+            <h2>Benvenuto</h2>
+            <div id="loginOk" class="code"></div>
+            <button type="button" onclick='logoutUser()'>LOGOUT</button>
+        </div>
+    </div>
+</div>  
+
+<script>
+
+//////////////////////////////////////////////////////////////////////
+//-- RENDER --//
+
+queryString = window.location.search;
+urlParams = new URLSearchParams(queryString);
+accToken = getCookie("SFToken");
+console.log('acess token after refresh: ' +accToken);
+//console.log(document.cookie);
+// Controllo se è presente un access token
+if(accToken !== ""){
+      getUserInfo(accToken)
+      .then(function (result) {
+        console.log(result);
+        document.getElementById("loginOk").innerText = result.name;
+        document.getElementById("buttonLogin").classList = "hidden";
+        document.getElementById("userOk").classList = "";
+      })
+      .catch(function (err) {
+        console.error('Augh, there was an error!', err.statusText);
+      });
+}else if(urlParams.get('code') !== null && accToken === ""){
+    console.log(queryString);
+    console.log('Loading Callback Params: ' + urlParams);
+    //Create the Code Response from the URL params
+    codeResponse = new Object;
+    codeResponse.code = urlParams.get('code');
+    codeResponse.state = urlParams.get('state');
+    codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
+// Call the common token exhcange method.
+    tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"))
+    setTimeout(function () {
+      location.reload(true);
+    }, 2000);
+}
+
+</script>
+<style>
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  font-family: arial, sans-serif;
+}
+@media(max-width: 400px) {
+  body {
+    padding: 10px;
+  }
+}
+.full-height {
+  min-height: 100vh;
+}
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.content {
+  max-width: 400px;
+}
+h2 {
+  text-align: center;
+}
+.code {
+  font-family: "Courier New", "Courier", monospace;
+  width: 100%;
+  padding: 4px;
+  border: 1px #ccc solid;
+  border-radius: 4px;
+  word-break: break-all;
+}
+.hidden {
+  display: none;
+}
+</style>
+
+</html>
