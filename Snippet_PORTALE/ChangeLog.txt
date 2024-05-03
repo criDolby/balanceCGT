@@ -7,3 +7,8 @@ v1.1
 			° commUrl
 		- Add getCookie function
 		- Add setCookie function
+	
+v1.2
+
+	- Fix Logout function
+	- Edit getUserInfo function 

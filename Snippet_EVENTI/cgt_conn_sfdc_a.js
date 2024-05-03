@@ -19,13 +19,9 @@
 
 async function initiateSSOFlow() {
 
-    //document.cookie = "sorgenteUser=" + sorgente + ";path=/;Secure;SameSite=None";
-    //document.cookie = "sorgenteUser=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
-
 //-- PCKE Generator --//
 
     let codeVerifier = generateRandomString();
-     //document.cookie = "codeVerifier=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
     localStorage.setItem("pkce_code_verifier", codeVerifier);
         // Hash and base64-urlencode the secret to use as the challenge
     let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
@@ -41,7 +37,7 @@ async function initiateSSOFlow() {
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
-//-- Redirect the Browser --//
+//-- Redirect --//
     window.location = redirectURL;
 }
 
@@ -67,10 +63,8 @@ function tokenExchange(response, codeVerifier) {
             if (this.status == 200) {
         //Access Tokens have been returned
                 let responseArr = JSON.parse(client.response)
-                // Creo il cookie
+
                 setCookie("SFToken", responseArr.access_token , 4);
-                //document.cookie = "SFTokenTest=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
-                //document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -98,7 +92,8 @@ function getUserInfo(accessToken) {
                     userArr = JSON.parse(client.response)
                     if(
                         (userArr.custom_attributes.flag_sito == 'false' && sorgente == 'sitoCGT')    ||
-                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT')
+                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') ||
+                        (userArr.custom_attributes.flag_eventi == 'false' && sorgente == 'eventiCGT') 
                     ){
                         window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
                     }else{
@@ -117,11 +112,10 @@ function getUserInfo(accessToken) {
 }
 
 function logoutUser() {
-    // let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
     let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout?redirectURL=' +redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
-
     let accessToken = getCookie("SFToken");
+
     client = new XMLHttpRequest();
     client.open("POST", commUrl + revokeTokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -167,10 +161,6 @@ function sha256(plain) {
 
 // Base64-urlencodes the input string
 function base64urlencode(str) {
-    // Convert the ArrayBuffer to string using Uint8 array to conver to what btoa accepts.
-    // btoa accepts chars only within ascii 0-255 and base64 encodes them.
-    // Then convert the base64 encoded to base64url encoded
-    //   (replace + with -, replace / with _, trim trailing =)
     return btoa(String.fromCharCode.apply(null, new Uint8Array(str)))
         .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }

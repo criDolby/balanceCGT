@@ -13,8 +13,8 @@
 
                     Created By Balance Spa
                     cgt_conn_sfdc_const_p
-                    versione 1.1
-                    18/04/2024
+                    versione 1.2
+                    03/05/2024
 **********************************************************************************************/
 
 const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti'; // Service Provider
@@ -23,5 +23,4 @@ const azureLogoutURI = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicro
 const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';	// Client ID Connected App
 const ssoProvider = 'AzureADB2CTest'; //Auth Provider 
 const sorgente = 'portaleCGT'; // scegliere tra portaleCGT, sitoCGT, eventiCGT
-const complProfiloComm = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/s/completamentoprofilo';
 
