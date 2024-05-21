@@ -57,7 +57,8 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
-    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI + "&scope=api%20id%20refresh_token";
+    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
+    /*+ "&scope=api%20id%20refresh_token";*/
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
 // Send Request
