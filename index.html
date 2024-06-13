@@ -42,6 +42,7 @@ if(accToken !== ""){
       })
       .catch(function (err) {
         console.error('Augh, there was an error!', err.statusText);
+        document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
       });
 }else if(urlParams.get('code') !== null && accToken === ""){
     console.log(queryString);
