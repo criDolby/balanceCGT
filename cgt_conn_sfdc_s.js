@@ -13,14 +13,11 @@
 
                     Created By Balance Spa
                     cgt_conn_sfdc_s
-                    versione 1.1
-                    18/04/2024
+                    versione 1.2
+                    21/06/2024
 **********************************************************************************************/
 
 async function initiateSSOFlow() {
-
-    //document.cookie = "sorgenteUser=" + sorgente + ";path=/;Secure;SameSite=None";
-    //document.cookie = "sorgenteUser=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
 
 //-- PCKE Generator --//
 
@@ -59,7 +56,6 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
     requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
-    /*+ "&scope=api%20id%20refresh_token";*/
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
 // Send Request
@@ -99,9 +95,8 @@ function getUserInfo(accessToken) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
                     if(
-                        (userArr.custom_attributes.flag_sito == 'false' && sorgente == 'sitoCGT')    ||
-                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') ||
-                        (userArr.custom_attributes.flag_eventi == 'false' && sorgente == 'eventiCGT') 
+                        (userArr.custom_attributes.flag_sito == 'false' && ( sorgente == 'sitoCGT' || sorgente == 'eventiCGT')) ||
+                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') 
                     ){
                         window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
                     }else{
