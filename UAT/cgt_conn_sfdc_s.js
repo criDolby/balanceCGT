@@ -12,9 +12,9 @@
 
 
                     Created By Balance Spa
-                    cgt_conn_sfdc_a
+                    cgt_conn_sfdc_s
                     versione 1.2
-                    03/05/2024
+                    21/06/2024
 **********************************************************************************************/
 
 async function initiateSSOFlow() {
@@ -23,7 +23,6 @@ async function initiateSSOFlow() {
 
     let codeVerifier = generateRandomString();
     localStorage.setItem("pkce_code_verifier", codeVerifier);
-        // Hash and base64-urlencode the secret to use as the challenge
     let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
     let authorizeURI = '/services/oauth2/authorize';
     let responsType = 'code';
@@ -37,7 +36,7 @@ async function initiateSSOFlow() {
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
-//-- Redirect --//
+//-- Redirect the Browser --//
     window.location = redirectURL;
 }
 
@@ -53,7 +52,7 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
-    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI;
+    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
 // Send Request
@@ -63,7 +62,7 @@ function tokenExchange(response, codeVerifier) {
             if (this.status == 200) {
         //Access Tokens have been returned
                 let responseArr = JSON.parse(client.response)
-
+                // Creo il cookie
                 setCookie("SFToken", responseArr.access_token , 4);
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
@@ -91,9 +90,8 @@ function getUserInfo(accessToken) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
                     if(
-                        (userArr.custom_attributes.flag_sito == 'false' && sorgente == 'sitoCGT')    ||
-                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') ||
-                        (userArr.custom_attributes.flag_eventi == 'false' && sorgente == 'eventiCGT') 
+                        (userArr.custom_attributes.flag_sito == 'false' && ( sorgente == 'sitoCGT' || sorgente == 'eventiCGT')) ||
+                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') 
                     ){
                         window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
                     }else{
@@ -114,8 +112,8 @@ function getUserInfo(accessToken) {
 function logoutUser() {
     let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout?redirectURL=' +redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
-    let accessToken = getCookie("SFToken");
 
+    let accessToken = getCookie("SFToken");
     client = new XMLHttpRequest();
     client.open("POST", commUrl + revokeTokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

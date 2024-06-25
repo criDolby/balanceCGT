@@ -39,7 +39,8 @@ if(accToken !== ""){
         document.getElementById("userOk").classList = "";
       })
       .catch(function (err) {
-        console.error('Augh, there was an error!', err.statusText);
+        //Se va in errore allora cancello il coockie del token
+        document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
       });
 }else if(urlParams.get('code') !== null && accToken === ""){
 
@@ -50,9 +51,6 @@ if(accToken !== ""){
     codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
 // Call the common token exhcange method.
     tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"))
-    setTimeout(function () {
-      location.reload(true);
-    }, 2000);
 }
 
 </script>

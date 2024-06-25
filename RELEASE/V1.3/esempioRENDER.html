@@ -28,8 +28,8 @@
 queryString = window.location.search;
 urlParams = new URLSearchParams(queryString);
 accToken = getCookie("SFToken");
-console.log('acess token after refresh: ' +accToken);
-//console.log(document.cookie);
+
+
 // Controllo se è presente un access token
 if(accToken !== ""){
       getUserInfo(accToken)
@@ -39,11 +39,11 @@ if(accToken !== ""){
         document.getElementById("userOk").classList = "";
       })
       .catch(function (err) {
-        console.error('Augh, there was an error!', err.statusText);
+        //Se va in errore allora cancello il coockie del token
+        document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
       });
 }else if(urlParams.get('code') !== null && accToken === ""){
-    console.log(queryString);
-    console.log('Loading Callback Params: ' + urlParams);
+
     //Create the Code Response from the URL params
     codeResponse = new Object;
     codeResponse.code = urlParams.get('code');
@@ -51,9 +51,6 @@ if(accToken !== ""){
     codeResponse.sfdc_community_url = urlParams.get('sfdc_community_url');
 // Call the common token exhcange method.
     tokenExchange(codeResponse, localStorage.getItem("pkce_code_verifier"))
-    setTimeout(function () {
-      location.reload(true);
-    }, 2000);
 }
 
 </script>

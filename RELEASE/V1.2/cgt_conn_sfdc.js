@@ -14,7 +14,7 @@
                     Created By Balance Spa
                     cgt_conn_sfdc
                     versione 1.2
-                    03/05/2024
+                    21/06/2024
 **********************************************************************************************/
 
 async function initiateSSOFlow() {
@@ -90,9 +90,8 @@ async function initiateSSOFlow() {
                     if (this.status == 200) {
                         userArr = JSON.parse(client.response)
                         if(
-                            (userArr.custom_attributes.flag_sito == 'false' && sorgente == 'sitoCGT')    ||
-                            (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') ||
-                            (userArr.custom_attributes.flag_eventi == 'false' && sorgente == 'eventiCGT') 
+                            (userArr.custom_attributes.flag_sito == 'false' && (sorgente == 'sitoCGT' || sorgente == 'eventiCGT')) ||
+                            (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT')
                         ){
                             window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
                         }else{

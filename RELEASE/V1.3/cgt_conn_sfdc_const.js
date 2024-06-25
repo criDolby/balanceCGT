@@ -12,15 +12,15 @@
 
 
                     Created By Balance Spa
-                    cgt_conn_sfdc_const_p
-                    versione 1.1
-                    18/04/2024
+                    cgt_conn_sfdc_const
+                    versione 1.2
+                    03/05/2024
 **********************************************************************************************/
 
-const commUrl = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti'; // Service Provider
-const redirectURI = 'https://sitoEsempio.it/'; // Redirect 
+const commUrl = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti'; // Service Provider
+const redirectURI = 'https://sitoEsempio.it/'; // Redirect Sito/Portale/Eventi
 const azureLogoutURI = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v1/oauth2/v2.0/logout'; // Endpoint Logout Azure
-const clientId = '3MVG9bmlmX4LX1ZvlQPwDwh5N1fOBV4wLtXixm2uPy7urVdUASmTjYk.YlQ65RUOIlT8k8OVhqIRROaa2B9yf';	// Client ID Connected App
+const clientId = '3MVG9bmlmX4LX1ZuAYAJHiS3dpHiJeBZ6NnK6mLmJiUy_SqlDcK34vfbGcrj0.6yJVoqNfjugFgmnRvfh.OII';	// Client ID Connected App
 const ssoProvider = 'AzureADB2CTest'; //Auth Provider 
 const sorgente = 'portaleCGT'; // scegliere tra portaleCGT, sitoCGT, eventiCGT
-const complProfiloComm = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/s/completamentoprofilo';
+

@@ -14,16 +14,15 @@
                     Created By Balance Spa
                     cgt_conn_sfdc_s
                     versione 1.1
-                    18/04/2024
+                    21/06/2024
 **********************************************************************************************/
 
 async function initiateSSOFlow() {
 
-    document.cookie = "sorgenteUser=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
-
 //-- PCKE Generator --//
 
     let codeVerifier = generateRandomString();
+     //document.cookie = "codeVerifier=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
     localStorage.setItem("pkce_code_verifier", codeVerifier);
         // Hash and base64-urlencode the secret to use as the challenge
     let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
@@ -39,15 +38,15 @@ async function initiateSSOFlow() {
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
-
 //-- Redirect the Browser --//
+//console.log(redirectURL);
     window.location = redirectURL;
 }
 
 function tokenExchange(response, codeVerifier) {
     // Get Values from Code Response
     let code = response.code;
-    let tokenURI = '/services/oauth2/token'; 
+    let tokenURI = '/services/oauth2/token';
 
 // Create Client
     client = new XMLHttpRequest();
@@ -56,7 +55,7 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
-    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI;
+    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
 // Send Request
@@ -65,9 +64,11 @@ function tokenExchange(response, codeVerifier) {
         if(this.readyState == 4) {
             if (this.status == 200) {
         //Access Tokens have been returned
-                responseArr = JSON.parse(client.response)
+                let responseArr = JSON.parse(client.response)
                 // Creo il cookie
                 setCookie("SFToken", responseArr.access_token , 4);
+                //document.cookie = "SFTokenTest=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
+                //document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
@@ -80,7 +81,9 @@ function tokenExchange(response, codeVerifier) {
 
 function getUserInfo(accessToken) {
     return new Promise(function (resolve, reject) {
+
         userInfoURI = '/services/oauth2/userinfo';
+        complProfilo = '/s/completamentoprofilo';
         let userArr = '';
         client = new XMLHttpRequest();
         client.open("GET", commUrl + userInfoURI, true);
@@ -91,8 +94,14 @@ function getUserInfo(accessToken) {
             if(this.readyState == 4) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
-                    resolve( userArr );
-                    
+                    if(
+                        (userArr.custom_attributes.flag_sito == 'false' && ( sorgente == 'sitoCGT' || sorgente == 'eventiCGT')) ||
+                        (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') 
+                    ){
+                        window.location = commUrl + complProfilo +'?sorgente=' +sorgente + '&redirectURL=' +redirectURI ;
+                    }else{
+                      resolve( userArr );
+                    } 
                 } else {
                     reject(
                         client.onError = function(){
@@ -106,21 +115,23 @@ function getUserInfo(accessToken) {
 }
 
 function logoutUser() {
-    let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + redirectURI;
+    let redirectLogoutURL = azureLogoutURI + '?post_logout_redirect_uri=' + commUrl + '/s/logout?redirectURL=' +redirectURI;
     let revokeTokenURI = '/services/oauth2/revoke';
+
     let accessToken = getCookie("SFToken");
     client = new XMLHttpRequest();
     client.open("POST", commUrl + revokeTokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     requestBody = "token=" + accessToken;
     client.send(requestBody);
-    client.onreadystatechange = function() {
+    client.onreadystatechange = async function() {
         if(this.readyState == 4) {
             if (this.status == 200) {
                 localStorage.clear();
                 sessionStorage.clear()
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
-                window.location = redirectLogoutURL;
+
+                window.location.replace(redirectLogoutURL);
             } else {
                 window.location = redirectLogoutURL;
             }
@@ -153,6 +164,10 @@ function sha256(plain) {
 
 // Base64-urlencodes the input string
 function base64urlencode(str) {
+    // Convert the ArrayBuffer to string using Uint8 array to conver to what btoa accepts.
+    // btoa accepts chars only within ascii 0-255 and base64 encodes them.
+    // Then convert the base64 encoded to base64url encoded
+    //   (replace + with -, replace / with _, trim trailing =)
     return btoa(String.fromCharCode.apply(null, new Uint8Array(str)))
         .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
@@ -182,5 +197,5 @@ function setCookie(cname, cvalue, hours) {
     const d = new Date();
     d.setTime(d.getTime() + (hours*60*60*1000));
     let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";domain=.cgt.it;path=/;Secure;SameSite=None";
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";Secure;path=/";
 }
