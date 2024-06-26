@@ -13,8 +13,8 @@
 
                     Created By Balance Spa
                     cgt_conn_sfdc
-                    versione 1.2
-                    21/06/2024
+                    versione 1.3
+                    25/06/2024
 **********************************************************************************************/
 
 async function initiateSSOFlow() {

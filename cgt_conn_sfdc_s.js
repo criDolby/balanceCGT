@@ -94,6 +94,7 @@ function getUserInfo(accessToken) {
             if(this.readyState == 4) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
+                    console.log(userArr);
                     if(
                         (userArr.custom_attributes.flag_sito == 'false' && ( sorgente == 'sitoCGT' || sorgente == 'eventiCGT')) ||
                         (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') 

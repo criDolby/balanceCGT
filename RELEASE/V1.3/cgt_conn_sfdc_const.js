@@ -13,8 +13,8 @@
 
                     Created By Balance Spa
                     cgt_conn_sfdc_const
-                    versione 1.2
-                    03/05/2024
+                    versione 1.3
+                    25/06/2024
 **********************************************************************************************/
 
 const commUrl = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti'; // Service Provider
