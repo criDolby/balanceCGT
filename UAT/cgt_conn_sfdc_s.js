@@ -51,6 +51,8 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+    client.setRequestHeader("Access-Control-Allow-Origin", "*");
+
 // Build Request Body
     requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
 // Add PKCE
