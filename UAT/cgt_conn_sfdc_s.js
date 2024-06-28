@@ -57,7 +57,7 @@ function tokenExchange(response, codeVerifier) {
 
 
 // Build Request Body
-    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
+    let requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
 
