@@ -78,7 +78,7 @@ function tokenExchange(response, codeVerifier) {
                 getUserInfo(responseArr.access_token, commUrl);
     })
     .catch(error => {
-       console.log(error);
+       console.log(JSON.parse(error));
         // Handle errors
     });
 // Send Request
