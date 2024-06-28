@@ -46,20 +46,46 @@ function tokenExchange(response, codeVerifier) {
     let tokenURI = '/services/oauth2/token';
 
 // Create Client
+/*
     client = new XMLHttpRequest();
     client.open("POST", commUrl + tokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
     client.setRequestHeader("Access-Control-Allow-Origin", "*");
+    */
+
 
 // Build Request Body
     requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
+
+
+    fetch(commUrl + tokenURI, {
+        method: 'POST',  
+        body: requestBody,
+        headers: {
+            "Accept": "application/x-www-form-urlencoded"
+        },
+        mode: 'no-cors' // Client-side workaround (use with caution)
+    })
+    .then(response => {
+        // Handle the response (limited functionality due to no-cors mode)
+        let responseArr = JSON.parse(response)
+                // Creo il cookie
+                setCookie("SFToken", responseArr.access_token , 4);
+                getUserInfo(responseArr.access_token, commUrl);
+    })
+    .catch(error => {
+       console.log(error);
+        // Handle errors
+    });
 // Send Request
+/*
     client.send(requestBody);
     client.onreadystatechange = function() {
+    */
         if(this.readyState == 4) {
             if (this.status == 200) {
         //Access Tokens have been returned
@@ -73,8 +99,8 @@ function tokenExchange(response, codeVerifier) {
                 }
             }
         }
-    }
 }
+
 
 function getUserInfo(accessToken) {
     return new Promise(function (resolve, reject) {
