@@ -52,7 +52,7 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
     client.setRequestHeader("Access-Control-Allow-Origin", "*");
-    client.setRequestHeader("Referrer-Policy", "no-referrer");
+    client.setRequestHeader("Origin", "https://cridolby.github.io/");
 
 // Build Request Body
     let requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
