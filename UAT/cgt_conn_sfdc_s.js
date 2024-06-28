@@ -46,15 +46,12 @@ function tokenExchange(response, codeVerifier) {
     let tokenURI = '/services/oauth2/token';
 
 // Create Client
-/*
     client = new XMLHttpRequest();
     client.open("POST", commUrl + tokenURI, true);
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
     client.setRequestHeader("Access-Control-Allow-Origin", "*");
-    */
-
 
 // Build Request Body
     let requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
@@ -62,29 +59,9 @@ function tokenExchange(response, codeVerifier) {
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
 
 
-    fetch(commUrl + tokenURI, {
-        method: 'POST',  
-        body: requestBody,
-        headers: {
-            "Accept": "application/x-www-form-urlencoded",
-            "Access-Control-Allow-Methods": "POST, GET, PUT",
-            "Access-Control-Allow-Headers": "Content-Type"
-        },
-        mode: 'no-cors' // Client-side workaround (use with caution)
-    })
-    .then(response => {
-        // Handle the response (limited functionality due to no-cors mode)
-        let responseArr = JSON.parse(response)
-                // Creo il cookie
-                setCookie("SFToken", responseArr.access_token , 4);
-                getUserInfo(responseArr.access_token, commUrl);
-    })
-    .catch(error => {
-       console.log(JSON.stringify(error));
-        // Handle errors
-    });
+    
 // Send Request
-/*
+
     client.send(requestBody);
     client.onreadystatechange = function() {
     
@@ -102,7 +79,7 @@ function tokenExchange(response, codeVerifier) {
             }
         }
     } 
-    */       
+           
 }
 
 
