@@ -66,7 +66,9 @@ function tokenExchange(response, codeVerifier) {
         method: 'POST',  
         body: requestBody,
         headers: {
-            "Accept": "application/x-www-form-urlencoded"
+            "Accept": "application/x-www-form-urlencoded",
+            "Access-Control-Allow-Methods": "POST, GET, PUT",
+            "Access-Control-Allow-Headers": "Content-Type"
         },
         mode: 'no-cors' // Client-side workaround (use with caution)
     })
@@ -85,7 +87,7 @@ function tokenExchange(response, codeVerifier) {
 /*
     client.send(requestBody);
     client.onreadystatechange = function() {
-    */
+    
         if(this.readyState == 4) {
             if (this.status == 200) {
         //Access Tokens have been returned
@@ -99,6 +101,8 @@ function tokenExchange(response, codeVerifier) {
                 }
             }
         }
+    } 
+    */       
 }
 
 
