@@ -135,6 +135,7 @@ function logoutUser() {
                 let mainDomain = fullDomain.includes('cgt') ? ';domain=.cgt.it' : '';
                 document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC" +mainDomain +";Secure;path=/";
                 */
+                document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;Secure;path=/";
                 window.location.replace(redirectLogoutURL);
             } else {
                 window.location = redirectLogoutURL;
@@ -204,6 +205,9 @@ function setCookie(cname, cvalue, hours) {
     /*
     let fullDomain = document.location;
     let mainDomain = fullDomain.includes('cgt') ? ';domain=.cgt.it' : '';
+    
     document.cookie = cname + "=" + cvalue + ";" + expires + ";Secure" + mainDomain + ";path=/";
     */
+    document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;Secure;path=/";
+    
 }
