@@ -197,5 +197,8 @@ function setCookie(cname, cvalue, hours) {
     const d = new Date();
     d.setTime(d.getTime() + (hours*60*60*1000));
     let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";Secure;path=/";
+    let fullDomain = document.location;
+    let mainDomain = fullDomain.includes('cgt') ? ';domain=.cgt.it' : '';
+    
+    document.cookie = cname + "=" + cvalue + ";" + expires + mainDomain + ";path=/";
 }
