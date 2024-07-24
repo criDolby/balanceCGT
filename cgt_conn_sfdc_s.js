@@ -208,6 +208,6 @@ function setCookie(cname, cvalue, hours) {
     
     document.cookie = cname + "=" + cvalue + ";" + expires + ";Secure" + mainDomain + ";path=/";
     */
-    document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;Secure;path=/";
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";Secure" + ";path=/";
     
 }
