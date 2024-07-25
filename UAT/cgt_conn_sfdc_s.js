@@ -133,7 +133,11 @@ function logoutUser() {
             if (this.status == 200) {
                 localStorage.clear();
                 sessionStorage.clear()
-                document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/";
+
+                let fullDomain = document.location;
+                let domain = (new URL(fullDomain));
+                let mainDomain = domain.host.includes('cgt') ? ';domain=.cgt.it' : '';
+                document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;" +mainDomain +";path=/";
 
                 window.location.replace(redirectLogoutURL);
             } else {
@@ -197,8 +201,12 @@ function setCookie(cname, cvalue, hours) {
     const d = new Date();
     d.setTime(d.getTime() + (hours*60*60*1000));
     let expires = "expires="+ d.toUTCString();
+    //let fullDomain = document.location;
+   // let mainDomain = fullDomain.includes('cgt') ? ';domain=.cgt.it' : '';
+
     let fullDomain = document.location;
-    let mainDomain = fullDomain.includes('cgt') ? ';domain=.cgt.it' : '';
+    let domain = (new URL(fullDomain));
+    let mainDomain = domain.host.includes('cgt') ? ';domain=.cgt.it' : '';
     
     document.cookie = cname + "=" + cvalue + ";" + expires + mainDomain + ";path=/";
 }
