@@ -30,7 +30,7 @@ async function initiateSSOFlow() {
     let responsType = 'code';
 
 //-- Costruzione redirect --//
-    let redirectURL = commUrl + authorizeURI +
+    let redirectURL = commUrl + "?lingua=en" + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
