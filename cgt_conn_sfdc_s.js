@@ -28,9 +28,8 @@ async function initiateSSOFlow() {
     let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
     let authorizeURI = '/services/oauth2/authorize';
     let responsType = 'code';
-
 //-- Costruzione redirect --//
-    let redirectURL = commUrl + "?lingua=en" + authorizeURI +
+    let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
@@ -39,8 +38,8 @@ async function initiateSSOFlow() {
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
 //-- Redirect the Browser --//
-//console.log(redirectURL);
-    window.location = redirectURL;
+    console.log(redirectURL);
+    //window.location = redirectURL;
 }
 
 function tokenExchange(response, codeVerifier) {
