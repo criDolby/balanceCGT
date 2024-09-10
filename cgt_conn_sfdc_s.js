@@ -38,8 +38,8 @@ async function initiateSSOFlow() {
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
 //-- Redirect the Browser --//
-    console.log(redirectURL);
-    //window.location = redirectURL;
+   // console.log(redirectURL);
+    window.location = redirectURL;
 }
 
 function tokenExchange(response, codeVerifier) {
