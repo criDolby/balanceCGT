@@ -1,0 +1,26 @@
+v1.1
+	
+	- Optimize session configuration
+		- Add set cookie parameter
+		- Removed locale and session parameters:
+			° clientId
+			° commUrl
+		- Add getCookie function
+		- Add setCookie function
+	
+v1.2
+
+	- Fix Logout function
+	- Edit getUserInfo function 
+
+v1.3
+	- Fix getUserInfo function
+	- update esempioRender
+
+v1.4
+	- Fix setCookie function
+	- Fix Logout function
+
+v1.5
+	- Add language parameter on getUserInfo redirect 
+
