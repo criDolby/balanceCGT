@@ -17,10 +17,9 @@
                     11/09/2024
 **********************************************************************************************/
 
-async function initiateSSOFlow() {
+    async function initiateSSOFlow() {
 
     //-- PCKE Generator --//
-    
         let codeVerifier = generateRandomString();
         localStorage.setItem("pkce_code_verifier", codeVerifier);
         let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
@@ -77,7 +76,7 @@ async function initiateSSOFlow() {
     function getUserInfo(accessToken) {
         return new Promise(function (resolve, reject) {
             
-            let language = 'Capire come possono popolare questa variabile';
+            let language = 'da impostare'; // (en/it)
             userInfoURI = '/services/oauth2/userinfo';
             complProfilo = '/s/completamentoprofilo';
             let userArr = '';
