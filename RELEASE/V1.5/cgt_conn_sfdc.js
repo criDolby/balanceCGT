@@ -124,12 +124,10 @@
                 if (this.status == 200) {
                     localStorage.clear();
                     sessionStorage.clear()
-                    
                     let fullDomain = document.location;
                     let domain = (new URL(fullDomain));
                     let mainDomain = domain.host.includes('cgt') ? ';domain=.cgt.it' : '';
                     document.cookie = "SFToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;" +mainDomain +";path=/";
-    
                     window.location.replace(redirectLogoutURL);
                 } else {
                     window.location.replace(redirectLogoutURL);
