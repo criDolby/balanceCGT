@@ -20,9 +20,7 @@
 async function initiateSSOFlow() {
 
 //-- PCKE Generator --//
-
     let codeVerifier = generateRandomString();
-     //document.cookie = "codeVerifier=" + sorgente + ";domain=.my.site.com;path=/;Secure;SameSite=None";
     localStorage.setItem("pkce_code_verifier", codeVerifier);
         // Hash and base64-urlencode the secret to use as the challenge
     let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
