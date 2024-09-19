@@ -34,7 +34,8 @@ async function initiateSSOFlow() {
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     '&code_verifier=' + encodeURIComponent(codeVerifier);
+     '&code_verifier=' + encodeURIComponent(codeVerifier) +
+     '&language=' + 'it';
 //-- Redirect the Browser --//
    // console.log(redirectURL);
     window.location = redirectURL;
@@ -64,8 +65,6 @@ function tokenExchange(response, codeVerifier) {
                 let responseArr = JSON.parse(client.response)
                 // Creo il cookie
                 setCookie("SFToken", responseArr.access_token , 4);
-                //document.cookie = "SFTokenTest=" +responseArr.access_token +"; path=/; Secure; domain=cgtspa--devmerge.sandbox.my.site.com";
-                //document.cookie = "SFToken=" +responseArr.access_token +"; path=/; Secure";
                 getUserInfo(responseArr.access_token, commUrl);
             } else {
                     client.onError = function(){
