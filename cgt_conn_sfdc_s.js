@@ -56,7 +56,9 @@ function tokenExchange(response, codeVerifier) {
     requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI + "&ui_locales=en" ; 
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
+    console.log(requestBody);
 // Send Request
+/*
     client.send(requestBody);
     client.onreadystatechange = function() {
         if(this.readyState == 4) {
@@ -73,6 +75,7 @@ function tokenExchange(response, codeVerifier) {
             }
         }
     }
+        */
 }
 
 function getUserInfo(accessToken) {
