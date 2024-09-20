@@ -34,11 +34,11 @@ async function initiateSSOFlow() {
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     '&code_verifier=' + encodeURIComponent(codeVerifier) +
-     '&ui_locales=' + 'en';
+     '&code_verifier=' + encodeURIComponent(codeVerifier);
+    // '&ui_locales=' + 'en';
 //-- Redirect the Browser --//
     console.log(redirectURL);
-    //window.location = redirectURL;
+    window.location = redirectURL;
 }
 
 function tokenExchange(response, codeVerifier) {
@@ -53,7 +53,7 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
 // Build Request Body
-    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
+    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI + "&ui_locales=en" ; 
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
 // Send Request
