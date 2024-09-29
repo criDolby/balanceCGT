@@ -58,7 +58,6 @@ function tokenExchange(response, codeVerifier) {
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
     console.log(requestBody);
 // Send Request
-/*
     client.send(requestBody);
     client.onreadystatechange = function() {
         if(this.readyState == 4) {
@@ -75,7 +74,6 @@ function tokenExchange(response, codeVerifier) {
             }
         }
     }
-        */
 }
 
 function getUserInfo(accessToken) {
