@@ -34,7 +34,7 @@ async function initiateSSOFlow() {
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     '&code_verifier=' + encodeURIComponent(codeVerifier);
+     '&code_verifier=' + encodeURIComponent(codeVerifier) +
      '&ui_locales=' + 'en';
 //-- Redirect the Browser --//
     console.log(redirectURL);
