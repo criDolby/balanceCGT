@@ -31,7 +31,7 @@ async function initiateSSOFlow() {
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
-     '&state=' + encodeURIComponent('lingua_en') +
+     '&state=' + encodeURIComponent(`lingua=inglese`) +
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
