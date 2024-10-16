@@ -31,11 +31,11 @@ async function initiateSSOFlow() {
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
+     '&state=' + encodeURIComponent('lingua_en') +
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier) +
-     '&state=' + encodeURIComponent('lingua:en') +
      '&ui_locales=' + 'en';
 
 //-- Redirect the Browser --//
