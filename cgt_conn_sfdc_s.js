@@ -27,12 +27,11 @@ async function initiateSSOFlow() {
     let authorizeURI = '/services/oauth2/authorize';
     let responsType = 'code';
 //-- Costruzione redirect --//
-   // let redirectURL = commUrl + authorizeURI +
-   let redirectURL = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v1/oauth2/v2.0/authorize' +
+    let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
-     '&state=' + encodeURIComponent(`lingua=inglese`) +
+     '&state=' + encodeURIComponent(`smartlink=inglese`) +
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
