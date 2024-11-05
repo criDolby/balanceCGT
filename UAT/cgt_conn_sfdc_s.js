@@ -40,8 +40,7 @@ async function initiateSSOFlow() {
         '&state=en';
         */
         let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/sso/AzureADB2CTest' + 
-            '/?ui_locales=en' +
-            '&provAuthorizeEndpointHost=' +redirectURI;
+            '/?ui_locales=en';
 //-- Redirect the Browser --//
     window.location = redirectURL;
 }
