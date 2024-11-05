@@ -40,7 +40,8 @@ async function initiateSSOFlow() {
 */
      let redirectURL = 'https://cgtspa--devmerge.sandbox.my.salesforce.com/services/auth/sso/AzureADB2CTest' +
     // '&redirect_uri=' + redirectURI + 
-     '/?ui_locales=' + 'en';
+     '/?ui_locales=' + 'en' +
+     '&provAuthorizeEndpointHost=https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v2/oauth2/v2.0/authorize';
 
  
 //-- Redirect the Browser --//
