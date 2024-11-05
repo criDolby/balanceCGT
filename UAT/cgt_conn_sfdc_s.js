@@ -28,6 +28,7 @@ async function initiateSSOFlow() {
     let responsType = 'code';
 
 //-- Costruzione redirect --//
+/*
     let redirectURL = commUrl + authorizeURI +
         '?client_id=' + clientId + 
         '&prompt=login%20consent' +
@@ -37,6 +38,9 @@ async function initiateSSOFlow() {
         '&code_challenge=' + encodeURIComponent(codeChallenge) + 
         '&code_verifier=' + encodeURIComponent(codeVerifier) + 
         '&state=en';
+        */
+        let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/oauth/AzureADB2CTest' + 
+            '/?expid=lingua';
 //-- Redirect the Browser --//
     window.location = redirectURL;
 }
