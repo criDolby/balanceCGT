@@ -28,15 +28,16 @@ async function initiateSSOFlow() {
     let responsType = 'code';
 
 //-- Costruzione redirect --//
-    let redirectURL = commUrl + authorizeURI +
-     '?client_id=' + clientId + 
+    let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/oauth/AzureADB2CTest' +
+     //'?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
-     '&response_type=' + responsType +
-     '&sso_provider=' + ssoProvider + 
-     '&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     '&code_verifier=' + encodeURIComponent(codeVerifier) + 
-     '&ui_locales=en_US';
+    // '&response_type=' + responsType +
+    // '&sso_provider=' + ssoProvider + 
+    // '&code_challenge=' + encodeURIComponent(codeChallenge) + 
+    // '&code_verifier=' + encodeURIComponent(codeVerifier) + 
+    // '&ui_locales=en_US';
+    'state=en';
 //-- Redirect the Browser --//
     window.location = redirectURL;
 }
