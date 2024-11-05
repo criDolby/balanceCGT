@@ -32,7 +32,7 @@ async function initiateSSOFlow() {
      //'?client_id=' + clientId + 
      '&prompt=login%20consent' +
     // '&redirect_uri=' + redirectURI + 
-    '&redirect_uri=' + 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/authcallback/AzureADB2CTest' + 
+    //'&redirect_uri=' + 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/authcallback/AzureADB2CTest' + 
     // '&response_type=' + responsType +
     // '&sso_provider=' + ssoProvider + 
     // '&code_challenge=' + encodeURIComponent(codeChallenge) + 
