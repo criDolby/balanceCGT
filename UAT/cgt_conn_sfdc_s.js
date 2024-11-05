@@ -28,10 +28,11 @@ async function initiateSSOFlow() {
     let responsType = 'code';
 
 //-- Costruzione redirect --//
-    let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/oauth2/authorize' +
+    let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/oauth/AzureADB2CTest' +
      //'?client_id=' + clientId + 
      '&prompt=login%20consent' +
-     '&redirect_uri=' + redirectURI + 
+    // '&redirect_uri=' + redirectURI + 
+    '&redirect_uri=' + 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/authcallback/AzureADB2CTest' + 
     // '&response_type=' + responsType +
     // '&sso_provider=' + ssoProvider + 
     // '&code_challenge=' + encodeURIComponent(codeChallenge) + 
