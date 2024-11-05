@@ -27,16 +27,21 @@ async function initiateSSOFlow() {
     let authorizeURI = '/services/oauth2/authorize';
     let responsType = 'code';
 //-- Costruzione redirect --//
+/*
     let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
-     '&state=' + encodeURIComponent(`smartlink=inglese`) +
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier) +
      '&ui_locales=' + 'en';
+     */
+     let redirectURL = 'https://cgtspa--devmerge.sandbox.my.salesforce.com/services/auth/sso/AzureADB2CTest' +
+     '&redirect_uri=' + redirectURI + 
+     '&ui_locales=' + 'en';
+
 
 //-- Redirect the Browser --//
    // console.log(redirectURL);
