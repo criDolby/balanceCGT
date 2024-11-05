@@ -39,8 +39,9 @@ async function initiateSSOFlow() {
         '&code_verifier=' + encodeURIComponent(codeVerifier) + 
         '&state=en';
         */
-        let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/oauth/AzureADB2CTest' + 
-            '/?ui_locales=en';
+        let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/sso/AzureADB2CTest' + 
+            '/?ui_locales=en' +
+            '&provAuthorizeEndpointHost=' +redirectURI;
 //-- Redirect the Browser --//
     window.location = redirectURL;
 }
