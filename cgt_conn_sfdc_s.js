@@ -35,10 +35,9 @@ async function initiateSSOFlow() {
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     '&code_verifier=' + encodeURIComponent(codeVerifier) +
-     '&ui_locales=' + 'en';
-     */
-
+     '&code_verifier=' + encodeURIComponent(codeVerifier);
+     
+*/
      let redirectURL = 'https://cgtspa--devmerge.sandbox.my.salesforce.com/services/auth/sso/AzureADB2CTest' +
     // '&redirect_uri=' + redirectURI + 
      '/?ui_locales=' + 'en';
