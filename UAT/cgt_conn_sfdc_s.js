@@ -37,7 +37,7 @@ async function initiateSSOFlow() {
     // '&code_challenge=' + encodeURIComponent(codeChallenge) + 
     // '&code_verifier=' + encodeURIComponent(codeVerifier) + 
     // '&ui_locales=en_US';
-    'state=en';
+    '&state=en';
 //-- Redirect the Browser --//
     window.location = redirectURL;
 }
