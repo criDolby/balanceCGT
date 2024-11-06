@@ -36,15 +36,15 @@ async function initiateSSOFlow() {
      '&sso_provider=' + ssoProvider + 
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
-     
-*/
-/*
+     */
+
+
      let redirectURL = 'https://cgtspa--devmerge.sandbox.my.salesforce.com/services/auth/sso/AzureADB2CTest' +
-    // '&redirect_uri=' + redirectURI + 
+     '&redirect_uri=' + redirectURI + 
      '/?ui_locales=' + 'en' +
      '&state=ciao';
-     */
-     let redirectURL = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v2/oauth2/v2.0/authorize?client_id=a6c3a0eb-7386-402e-8291-b1eed2105ba4&scope=a6c3a0eb-7386-402e-8291-b1eed2105ba4+openid&response_type=code&response_mode=query&redirect_uri=https%3A%2F%2Fcgtspa--devmerge.sandbox.my.site.com%2FCGTPortaleRegistrazioneClienti%2Fservices%2Fauthcallback%2FAzureADB2CTest&state=fdfsf';
+     
+    // let redirectURL = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v2/oauth2/v2.0/authorize?client_id=a6c3a0eb-7386-402e-8291-b1eed2105ba4&scope=a6c3a0eb-7386-402e-8291-b1eed2105ba4+openid&response_type=code&response_mode=query&redirect_uri=https%3A%2F%2Fcgtspa--devmerge.sandbox.my.site.com%2FCGTPortaleRegistrazioneClienti%2Fservices%2Fauthcallback%2FAzureADB2CTest&state=fdfsf';
 
  
 //-- Redirect the Browser --//
