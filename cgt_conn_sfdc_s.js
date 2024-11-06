@@ -25,7 +25,7 @@ async function initiateSSOFlow() {
         // Hash and base64-urlencode the secret to use as the challenge
     let codeChallenge = await pkceChallengeFromVerifier(codeVerifier);
     let authorizeURI = '/services/oauth2/authorize';
-    let responsType = 'token';
+    let responsType = 'code';
 //-- Costruzione redirect --//
 
     let redirectURL = commUrl + authorizeURI +
