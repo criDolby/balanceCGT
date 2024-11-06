@@ -29,6 +29,7 @@ async function initiateSSOFlow() {
 //-- Costruzione redirect --//
 
  //https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti
+ /*
     let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
@@ -37,7 +38,14 @@ async function initiateSSOFlow() {
      '&sso_provider=' + ssoProvider +
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
-     
+     */
+     let redirectURL = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/sso/AzureADB2CTest/?ui_locales=' + 'en'  +
+     '?client_id=' + clientId + 
+     '&prompt=consent' +
+     '&redirect_uri=' + redirectURI +
+     '&response_type=' + responsType +
+     '&code_challenge=' + encodeURIComponent(codeChallenge) + 
+     '&code_verifier=' + encodeURIComponent(codeVerifier);
 
 
     // let redirectURL = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/sso/AzureADB2CTest' +
