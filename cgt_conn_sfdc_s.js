@@ -32,8 +32,7 @@ async function initiateSSOFlow() {
     let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
-    // '&redirect_uri=' + redirectURI + 
-        '&redirect_uri=' + 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/sso/AzureADB2CTest/?ui_locales=en'+ 
+     '&redirect_uri=' + redirectURI +
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider +
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
