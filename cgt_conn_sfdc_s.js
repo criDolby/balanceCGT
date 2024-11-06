@@ -27,13 +27,13 @@ async function initiateSSOFlow() {
     let authorizeURI = '/services/oauth2/authorize';
     let responsType = 'code';
 //-- Costruzione redirect --//
-
+// https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti
     let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
      '&response_type=' + responsType +
-     '&sso_provider=' + ssoProvider ;
+     '&sso_provider=' + ssoProvider +
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
      '&code_verifier=' + encodeURIComponent(codeVerifier);
      
