@@ -34,8 +34,8 @@ async function initiateSSOFlow() {
      '&redirect_uri=' + redirectURI + 
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider ;
-     //'&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     //'&code_verifier=' + encodeURIComponent(codeVerifier);
+     '&code_challenge=' + encodeURIComponent(codeChallenge) + 
+     '&code_verifier=' + encodeURIComponent(codeVerifier);
      
 
 /*
