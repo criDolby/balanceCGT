@@ -49,7 +49,7 @@ async function initiateSSOFlow() {
  */
 //-- Redirect the Browser --//
    // console.log(redirectURL);
-    window.location.replace = redirectURL;
+    window.location = redirectURL;
 }
 
 function tokenExchange(response, codeVerifier) {
