@@ -33,9 +33,9 @@ async function initiateSSOFlow() {
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI + 
      '&response_type=' + responsType +
-     '&sso_provider=' + ssoProvider + 
-     '&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     '&code_verifier=' + encodeURIComponent(codeVerifier);
+     '&sso_provider=' + ssoProvider ;
+     //'&code_challenge=' + encodeURIComponent(codeChallenge) + 
+     //'&code_verifier=' + encodeURIComponent(codeVerifier);
      
 
 /*
