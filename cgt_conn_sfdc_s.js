@@ -61,14 +61,20 @@ function tokenExchange(response, codeVerifier) {
     client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     client.setRequestHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
     client.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+    client.setRequestHeader("Access-Control-Allow-Origin", "*");
+
 // Build Request Body
-    requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI + "&ui_locales=en" ; 
+    let requestBody = "code=" + code + "&grant_type=authorization_code&client_id=" + clientId + "&redirect_uri=" + redirectURI ; 
 // Add PKCE
     requestBody = requestBody + "&code_verifier=" + codeVerifier;
-    console.log(requestBody);
+
+
+    
 // Send Request
+
     client.send(requestBody);
     client.onreadystatechange = function() {
+    
         if(this.readyState == 4) {
             if (this.status == 200) {
         //Access Tokens have been returned
@@ -82,8 +88,10 @@ function tokenExchange(response, codeVerifier) {
                 }
             }
         }
-    }
+    } 
+           
 }
+
 
 function getUserInfo(accessToken) {
     return new Promise(function (resolve, reject) {
@@ -100,7 +108,6 @@ function getUserInfo(accessToken) {
             if(this.readyState == 4) {
                 if (this.status == 200) {
                     userArr = JSON.parse(client.response)
-                    console.log(userArr);
                     if(
                         (userArr.custom_attributes.flag_sito == 'false' && ( sorgente == 'sitoCGT' || sorgente == 'eventiCGT')) ||
                         (userArr.custom_attributes.flag_portale == 'false' && sorgente == 'portaleCGT') 
