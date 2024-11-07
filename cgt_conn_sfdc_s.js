@@ -28,23 +28,22 @@ async function initiateSSOFlow() {
     let responsType = 'code';
 //-- Costruzione redirect --//
 
- //https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti
-  /*  let redirectURL = commUrl + authorizeURI +
+    let redirectURL = commUrl + authorizeURI +
      '?client_id=' + clientId + 
      '&prompt=login%20consent' +
      '&redirect_uri=' + redirectURI +
      '&response_type=' + responsType +
      '&sso_provider=' + ssoProvider +
      '&code_challenge=' + encodeURIComponent(codeChallenge) + 
-     '&code_verifier=' + encodeURIComponent(codeVerifier);*/
-
+     '&code_verifier=' + encodeURIComponent(codeVerifier);
+/*
      let redirectURL = 'https://cgtspa--devmerge.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/sso/AzureADB2CTest' +
      '/?ui_locales=' + 'en' +
      '&startURL=/CGTPortaleRegistrazioneClienti/s/?redirectURL=' +redirectURI;
      
     // let redirectURL = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v2/oauth2/v2.0/authorize?client_id=a6c3a0eb-7386-402e-8291-b1eed2105ba4&scope=a6c3a0eb-7386-402e-8291-b1eed2105ba4+openid&response_type=code&response_mode=query&redirect_uri=https%3A%2F%2Fcgtspa--devmerge.sandbox.my.site.com%2FCGTPortaleRegistrazioneClienti%2Fservices%2Fauthcallback%2FAzureADB2CTest&state=fdfsf';
 
- 
+*/
 //-- Redirect the Browser --//
    // console.log(redirectURL);
     window.location = redirectURL;
