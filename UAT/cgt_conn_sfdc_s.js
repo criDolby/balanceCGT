@@ -13,7 +13,7 @@
 
                     Created By Balance Spa
                     cgt_conn_sfdc_s
-                    versione 1.2
+                    versione 1.5
                     21/06/2024
 **********************************************************************************************/
 
@@ -28,7 +28,7 @@ async function initiateSSOFlow() {
     let responsType = 'code';
 
 //-- Costruzione redirect --//
-/*
+
     let redirectURL = commUrl + authorizeURI +
         '?client_id=' + clientId + 
         '&prompt=login%20consent' +
@@ -38,10 +38,7 @@ async function initiateSSOFlow() {
         '&code_challenge=' + encodeURIComponent(codeChallenge) + 
         '&code_verifier=' + encodeURIComponent(codeVerifier) + 
         '&state=en';
-        */
-        let redirectURL = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti/services/auth/sso/AzureADB2CTest' + 
-            '/?ui_locales=en' +
-            '&redirect_uri=' +  redirectURI ;
+
 //-- Redirect the Browser --//
     window.location = redirectURL;
 }

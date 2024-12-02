@@ -13,7 +13,7 @@
 
                     Created By Balance Spa
                     cgt_conn_sfdc_const_s
-                    versione 1.1
+                    versione 1.5
                     18/04/2024
 **********************************************************************************************/
 
@@ -21,7 +21,7 @@
 const commUrl = 'https://cgtspa--uat.sandbox.my.site.com/CGTPortaleRegistrazioneClienti';
 const redirectURI = 'https://cridolby.github.io/balanceCGT/UAT';
 const azureLogoutURI = 'https://cgtb2cstaging.b2clogin.com/cgtb2cstaging.onmicrosoft.com/b2c_1a_sfidentity_signup_signin_v2/oauth2/v2.0/logout';
-const clientId = '3MVG9bmlmX4LX1ZuAYAJHiS3dpHiJeBZ6NnK6mLmJiUy_SqlDcK34vfbGcrj0.6yJVoqNfjugFgmnRvfh.OII';
+const clientId = '3MVG9d52Y8AsoT3M.IdnKxaXJLQEa61vS.S4lZRCWMmwPHwghcR2dYVn6mNcwLuaqeKvcCSXHXQQ5w8fmXLTK';
 const ssoProvider = 'AzureADB2CTest';
 //const sorgente = 'portaleCGT';
 const sorgente = 'sitoCGT';
